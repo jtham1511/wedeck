@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "770824008817",
+    "project_id": "wedeck-a6a9a",
+    "storage_bucket": "wedeck-a6a9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770824008817:android:97099f1ce294436fded7d0",
+        "android_client_info": {
+          "package_name": "com.yws.wedeck005"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770824008817-l7ftftn12j16f2d4l03oiqd1tsau0jif.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yws.wedeck005",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "770824008817-37n1ssu30u6riul70h53ekb9taneq1je.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJnXeCa48RlX43pt0TSh8vM0Nt0A61a6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770824008817-37n1ssu30u6riul70h53ekb9taneq1je.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "770824008817-artote5bihtknhkeefjlco2h08l2oftq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yws.wedeck005"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
