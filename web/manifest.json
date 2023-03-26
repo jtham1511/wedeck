@@ -1,6 +1,6 @@
 {
-    "name": "WeDeck-Beta",
-    "short_name": "WeDeck-Beta",
+    "name": "WeDeck",
+    "short_name": "WeDeck",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -102,7 +102,7 @@ class _G1FlutedSilverFirWidgetState extends State<G1FlutedSilverFirWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          'G1 Fluted Dark Ebony',
+                          'G1 Fluted Silver Fir',
                           style: FlutterFlowTheme.of(context).title2.override(
                                 fontFamily: 'Outfit',
                                 color: Color(0xFF14181B),
@@ -137,7 +137,7 @@ class _G1FlutedSilverFirWidgetState extends State<G1FlutedSilverFirWidget>
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 12.0, 0.0, 0.0),
                             child: Text(
-                              'Our G1 series of fluted dark ebony wpc deck is widely used in condominiums and hotel setting and has one of the highest anti slip rating of R11 for all wpc series in the market. It is also a Green label product.\n\nDimensions: 25mmx145mmx2100mm.',
+                              'Our G1 series of fluted silver fir wpc deck is widely used in seaside resort and hotel setting and has one of the highest anti slip rating of R11 for all wpc series in the market. It is also a Green label product.\n\nDimensions: 25mmx145mmx2100mm.',
                               style: FlutterFlowTheme.of(context)
                                   .bodyText2
                                   .override(

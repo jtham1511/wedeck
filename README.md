@@ -1,4 +1,4 @@
-# WeDeck-Beta
+# WeDeck
 
 A new Flutter project.
 

@@ -5,7 +5,7 @@
 
 
     <application
-        android:label="WeDeck"
+        android:label="WeDeck-Beta"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
@@ -45,7 +45,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="wedeckbeta" android:host="wedeckbeta.com" />
+                <data android:scheme="wedeck" android:host="www.yws.com.sg" />
             </intent-filter>
 
         </activity>

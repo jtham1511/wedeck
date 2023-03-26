@@ -8,27 +8,26 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'g1_fluted_walnutwpc_model.dart';
-export 'g1_fluted_walnutwpc_model.dart';
+import 'solid_oak_skirting_model.dart';
+export 'solid_oak_skirting_model.dart';
 
-class G1FlutedWalnutwpcWidget extends StatefulWidget {
-  const G1FlutedWalnutwpcWidget({Key? key}) : super(key: key);
+class SolidOakSkirtingWidget extends StatefulWidget {
+  const SolidOakSkirtingWidget({Key? key}) : super(key: key);
 
   @override
-  _G1FlutedWalnutwpcWidgetState createState() =>
-      _G1FlutedWalnutwpcWidgetState();
+  _SolidOakSkirtingWidgetState createState() => _SolidOakSkirtingWidgetState();
 }
 
-class _G1FlutedWalnutwpcWidgetState extends State<G1FlutedWalnutwpcWidget>
+class _SolidOakSkirtingWidgetState extends State<SolidOakSkirtingWidget>
     with TickerProviderStateMixin {
-  late G1FlutedWalnutwpcModel _model;
+  late SolidOakSkirtingModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => G1FlutedWalnutwpcModel());
+    _model = createModel(context, () => SolidOakSkirtingModel());
   }
 
   @override
@@ -87,7 +86,7 @@ class _G1FlutedWalnutwpcWidgetState extends State<G1FlutedWalnutwpcWidget>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16.0),
                         child: Image.asset(
-                          'assets/images/G1_Fluted_Walnut_wpc.jpg',
+                          'assets/images/Solid_Oak_Skirting_.jpg',
                           width: double.infinity,
                           height: 430.0,
                           fit: BoxFit.fitWidth,
@@ -102,7 +101,7 @@ class _G1FlutedWalnutwpcWidgetState extends State<G1FlutedWalnutwpcWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          'G1 Fluted Walnut wpc',
+                          'Solid Oak Skirting',
                           style: FlutterFlowTheme.of(context).title2.override(
                                 fontFamily: 'Outfit',
                                 color: Color(0xFF14181B),
@@ -112,7 +111,7 @@ class _G1FlutedWalnutwpcWidgetState extends State<G1FlutedWalnutwpcWidget>
                         ),
                         Expanded(
                           child: Text(
-                            '\$ 6.50/ft²',
+                            '\$ 1.50/ft',
                             textAlign: TextAlign.end,
                             style:
                                 FlutterFlowTheme.of(context).subtitle1.override(
@@ -137,7 +136,7 @@ class _G1FlutedWalnutwpcWidgetState extends State<G1FlutedWalnutwpcWidget>
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 12.0, 0.0, 0.0),
                             child: Text(
-                              'Our G1 series of fluted walnut wpc deck is widely used in commercial setting and has one of the highest anti slip rating of R11 for all wpc series in the market. It is also a Green label product.\n\nDimensions: 25mmx145mmx2100mm.',
+                              'Our Oak skirting is milled to exacting standard and comes prefinished with sealer and waterbase coating.\n\nDimensions: 11mmx70mmx1200 to 2400mm',
                               style: FlutterFlowTheme.of(context)
                                   .bodyText2
                                   .override(
@@ -157,52 +156,57 @@ class _G1FlutedWalnutwpcWidgetState extends State<G1FlutedWalnutwpcWidget>
                         EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 40.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Container(
-                                width: 130.0,
-                                height: 50.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(
-                                    color: Color(0xFFF1F4F8),
-                                    width: 2.0,
-                                  ),
-                                ),
-                                child: FlutterFlowCountController(
-                                  decrementIconBuilder: (enabled) => Icon(
-                                    Icons.remove_rounded,
-                                    color: enabled
-                                        ? Color(0xFF57636C)
-                                        : Color(0xFF57636C),
-                                    size: 16.0,
-                                  ),
-                                  incrementIconBuilder: (enabled) => Icon(
-                                    Icons.add_rounded,
-                                    color: enabled
-                                        ? Color(0xFF4B39EF)
-                                        : Color(0xFF57636C),
-                                    size: 16.0,
-                                  ),
-                                  countBuilder: (count) => Text(
-                                    count.toString(),
-                                    style: GoogleFonts.getFont(
-                                      'Libre Caslon Display',
-                                      color: Color(0xFF14181B),
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20.0,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 30.0, 0.0, 0.0),
+                                child: Container(
+                                  width: 130.0,
+                                  height: 50.0,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    shape: BoxShape.rectangle,
+                                    border: Border.all(
+                                      color: Color(0xFFF1F4F8),
+                                      width: 2.0,
                                     ),
                                   ),
-                                  count: _model.countControllerValue ??= 1,
-                                  updateCount: (count) => setState(() =>
-                                      _model.countControllerValue = count),
-                                  stepSize: 1,
-                                  minimum: 1,
+                                  child: FlutterFlowCountController(
+                                    decrementIconBuilder: (enabled) => Icon(
+                                      Icons.remove_rounded,
+                                      color: enabled
+                                          ? Color(0xFF57636C)
+                                          : Color(0xFF57636C),
+                                      size: 16.0,
+                                    ),
+                                    incrementIconBuilder: (enabled) => Icon(
+                                      Icons.add_rounded,
+                                      color: enabled
+                                          ? Color(0xFF4B39EF)
+                                          : Color(0xFF57636C),
+                                      size: 16.0,
+                                    ),
+                                    countBuilder: (count) => Text(
+                                      count.toString(),
+                                      style: GoogleFonts.getFont(
+                                        'Libre Caslon Display',
+                                        color: Color(0xFF14181B),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20.0,
+                                      ),
+                                    ),
+                                    count: _model.countControllerValue ??= 1,
+                                    updateCount: (count) => setState(() =>
+                                        _model.countControllerValue = count),
+                                    stepSize: 1,
+                                    minimum: 1,
+                                  ),
                                 ),
                               ),
                             ],

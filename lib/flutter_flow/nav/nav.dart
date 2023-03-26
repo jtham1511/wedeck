@@ -20,8 +20,8 @@ export 'serialization_util.dart';
 const kTransitionInfoKey = '__transition_info__';
 
 class AppStateNotifier extends ChangeNotifier {
-  WeDeckBetaFirebaseUser? initialUser;
-  WeDeckBetaFirebaseUser? user;
+  WeDeckFirebaseUser? initialUser;
+  WeDeckFirebaseUser? user;
   bool showSplashImage = true;
   String? _redirectLocation;
 
@@ -46,7 +46,7 @@ class AppStateNotifier extends ChangeNotifier {
   /// to perform subsequent actions (such as navigation) afterwards.
   void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
 
-  void update(WeDeckBetaFirebaseUser newUser) {
+  void update(WeDeckFirebaseUser newUser) {
     initialUser ??= newUser;
     user = newUser;
     // Refresh the app on auth change unless explicitly marked otherwise.
@@ -179,6 +179,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'privacy',
           path: '/privacy',
           builder: (context, params) => PrivacyWidget(),
+        ),
+        FFRoute(
+          name: 'S3W5BrasilianWalnut',
+          path: '/s3W5BrasilianWalnut',
+          builder: (context, params) => S3W5BrasilianWalnutWidget(),
+        ),
+        FFRoute(
+          name: 'S3W6BrasilianEbony',
+          path: '/s3W6BrasilianEbony',
+          builder: (context, params) => S3W6BrasilianEbonyWidget(),
+        ),
+        FFRoute(
+          name: 'SolidOakSkirting',
+          path: '/solidOakSkirting',
+          builder: (context, params) => SolidOakSkirtingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,

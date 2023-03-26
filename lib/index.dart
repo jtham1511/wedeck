@@ -26,3 +26,9 @@ export '/profile_edit/profile_edit_widget.dart' show ProfileEditWidget;
 export '/my_qr/my_qr_widget.dart' show MyQrWidget;
 export '/login/login_widget.dart' show LoginWidget;
 export '/privacy/privacy_widget.dart' show PrivacyWidget;
+export '/s3_w5_brasilian_walnut/s3_w5_brasilian_walnut_widget.dart'
+    show S3W5BrasilianWalnutWidget;
+export '/s3_w6_brasilian_ebony/s3_w6_brasilian_ebony_widget.dart'
+    show S3W6BrasilianEbonyWidget;
+export '/solid_oak_skirting/solid_oak_skirting_widget.dart'
+    show SolidOakSkirtingWidget;
