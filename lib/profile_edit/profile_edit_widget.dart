@@ -110,6 +110,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
               child: AuthUserStreamWidget(
                 builder: (context) => TextFormField(
                   controller: _model.yourNameController,
+                  textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Your Name',
@@ -166,8 +167,12 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                         fontWeight: FontWeight.normal,
                       ),
                   maxLines: null,
+                  keyboardType: TextInputType.name,
                   validator:
                       _model.yourNameControllerValidator.asValidator(context),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))
+                  ],
                 ),
               ),
             ),
@@ -231,8 +236,12 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                       fontWeight: FontWeight.normal,
                     ),
                 maxLines: null,
+                keyboardType: TextInputType.emailAddress,
                 validator:
                     _model.emailaddressControllerValidator.asValidator(context),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))
+                ],
               ),
             ),
             Padding(
@@ -310,6 +319,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
               child: AuthUserStreamWidget(
                 builder: (context) => TextFormField(
                   controller: _model.companyController,
+                  textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Company',
@@ -368,6 +378,9 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   maxLines: null,
                   validator:
                       _model.companyControllerValidator.asValidator(context),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))
+                  ],
                 ),
               ),
             ),

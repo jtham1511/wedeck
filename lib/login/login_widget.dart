@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/forgot/forgot_widget.dart';
 import '/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login_model.dart';
@@ -143,10 +144,10 @@ class _LoginWidgetState extends State<LoginWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 24.0, 12.0),
             child: Container(
               width: double.infinity,
-              height: 60.0,
+              height: 65.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
                 boxShadow: [
@@ -206,11 +207,16 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
                 style: FlutterFlowTheme.of(context).bodyText1.override(
                       fontFamily: 'Poppins',
-                      fontSize: 18.0,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
                     ),
                 maxLines: null,
+                keyboardType: TextInputType.emailAddress,
                 validator:
                     _model.emailAddressControllerValidator.asValidator(context),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))
+                ],
               ),
             ),
           ),
@@ -218,7 +224,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 24.0, 0.0),
             child: Container(
               width: double.infinity,
-              height: 60.0,
+              height: 65.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
                 boxShadow: [
@@ -292,8 +298,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
                 style: FlutterFlowTheme.of(context).bodyText1.override(
                       fontFamily: 'Poppins',
-                      fontSize: 18.0,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
                     ),
+                keyboardType: TextInputType.visiblePassword,
                 validator: _model.passwordLoginControllerValidator
                     .asValidator(context),
               ),

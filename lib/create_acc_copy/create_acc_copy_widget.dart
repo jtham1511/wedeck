@@ -5,11 +5,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/login/login_widget.dart';
 import '/main.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'create_acc_copy_model.dart';
@@ -69,7 +67,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -214,7 +212,8 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   .bodyText1
                                   .override(
                                     fontFamily: 'Outfit',
-                                    color: Color(0xFF0F1113),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -245,6 +244,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   Duration(milliseconds: 2000),
                                   () => setState(() {}),
                                 ),
+                                textCapitalization: TextCapitalization.words,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Your Name',
@@ -317,13 +317,19 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                     .bodyText1
                                     .override(
                                       fontFamily: 'Outfit',
-                                      color: Color(0xFF0F1113),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w600,
                                     ),
                                 maxLines: null,
+                                keyboardType: TextInputType.name,
                                 validator: _model.usernameControllerValidator
                                     .asValidator(context),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp('[a-zA-Z]'))
+                                ],
                               ),
                             ),
                           ),
@@ -401,7 +407,8 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                     .bodyText1
                                     .override(
                                       fontFamily: 'Outfit',
-                                      color: Color(0xFF0F1113),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -492,13 +499,18 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                     .bodyText1
                                     .override(
                                       fontFamily: 'Outfit',
-                                      color: Color(0xFF0F1113),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w600,
                                     ),
                                 maxLines: null,
                                 validator: _model.companynameControllerValidator
                                     .asValidator(context),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp('[a-zA-Z0-9]'))
+                                ],
                               ),
                             ),
                           ),
@@ -586,7 +598,8 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   .bodyText1
                                   .override(
                                     fontFamily: 'Outfit',
-                                    color: Color(0xFF0F1113),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -607,105 +620,114 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                       child: Container(
                         decoration: BoxDecoration(),
-                        child: Stack(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
                           children: [
-                            TextFormField(
-                              controller: _model.passwordconfirmController,
-                              obscureText: !_model.passwordconfirmVisibility,
-                              decoration: InputDecoration(
-                                labelText: 'Confirm Password',
-                                labelStyle: FlutterFlowTheme.of(context)
-                                    .bodyText2
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFF57636C),
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal,
+                            Stack(
+                              children: [
+                                TextFormField(
+                                  controller: _model.passwordconfirmController,
+                                  obscureText:
+                                      !_model.passwordconfirmVisibility,
+                                  decoration: InputDecoration(
+                                    labelText: 'Confirm Password',
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                    hintText:
+                                        'Please Confirm your password here...',
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0xFFF1F4F8),
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(40.0),
                                     ),
-                                hintText:
-                                    'Please Confirm your password here...',
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyText2
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFF57636C),
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(40.0),
                                     ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFF1F4F8),
-                                    width: 2.0,
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(40.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(40.0),
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    contentPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 24.0, 24.0, 24.0),
+                                    suffixIcon: InkWell(
+                                      onTap: () => setState(
+                                        () => _model.passwordconfirmVisibility =
+                                            !_model.passwordconfirmVisibility,
+                                      ),
+                                      focusNode: FocusNode(skipTraversal: true),
+                                      child: Icon(
+                                        _model.passwordconfirmVisibility
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined,
+                                        color: Color(0xFF57636C),
+                                        size: 22.0,
+                                      ),
+                                    ),
                                   ),
-                                  borderRadius: BorderRadius.circular(40.0),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                  keyboardType: TextInputType.visiblePassword,
+                                  validator: _model
+                                      .passwordconfirmControllerValidator
+                                      .asValidator(context),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp('[a-zA-Z0-9]'))
+                                  ],
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(40.0),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 24.0, 24.0, 24.0),
-                                suffixIcon: InkWell(
-                                  onTap: () => setState(
-                                    () => _model.passwordconfirmVisibility =
-                                        !_model.passwordconfirmVisibility,
-                                  ),
-                                  focusNode: FocusNode(skipTraversal: true),
-                                  child: Icon(
-                                    _model.passwordconfirmVisibility
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                    color: Color(0xFF57636C),
-                                    size: 22.0,
-                                  ),
-                                ),
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF0F1113),
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                              keyboardType: TextInputType.visiblePassword,
-                              validator: _model
-                                  .passwordconfirmControllerValidator
-                                  .asValidator(context),
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp('[a-zA-Z0-9]'))
                               ],
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 80.0, 5.0, 0.0),
+                                  0.0, 10.0, 0.0, 0.0),
                               child: Text(
-                                'By providing your Personal Data to us, you consent to us processing your Personal Data in accordance with this Privacy Policy, and you confirm that all Personal Data provided by you is accurate and complete, and that none of it is misleading or out of date. You will promptly update us in the event of any change to your Personal Data.\n\nWe may reject access request if any exception or prohibition under the PDPA apply.\n',
+                                'By providing your Personal Data to us, you consent to us processing your Personal Data in accordance with this Privacy Policy, and you confirm that all Personal Data provided by you is accurate and complete, and that none of it is misleading or out of date. You will promptly update us in the event of any change to your Personal Data.\n\nWe may reject access request if any exception or prohibition under the PDPA apply.',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
                                       fontFamily: 'Poppins',
                                       fontSize: 10.0,
+                                      fontWeight: FontWeight.w300,
                                     ),
                               ),
                             ),
@@ -791,7 +813,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 10.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -821,7 +843,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                             text: 'Log In',
                             options: FFButtonOptions(
                               width: 90.0,
-                              height: 30.0,
+                              height: 50.0,
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
@@ -840,150 +862,6 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          AutoSizeText(
-                            'Use a social platform to continue',
-                            textAlign: TextAlign.center,
-                            style:
-                                FlutterFlowTheme.of(context).bodyText2.override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFF57636C),
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                          ),
-                          FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
-                            },
-                            text: 'Coming Soon !!!',
-                            options: FFButtonOptions(
-                              width: 130.0,
-                              height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                  ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            showLoadingIndicator: false,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            width: 40.0,
-                            height: 40.0,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF0F1113),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 5.0,
-                                  color: Color(0x3314181B),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              shape: BoxShape.circle,
-                            ),
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: FaIcon(
-                              FontAwesomeIcons.google,
-                              color: Colors.white,
-                              size: 24.0,
-                            ),
-                          ),
-                          Container(
-                            width: 40.0,
-                            height: 40.0,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF0F1113),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 5.0,
-                                  color: Color(0x3314181B),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              shape: BoxShape.circle,
-                            ),
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: FaIcon(
-                              FontAwesomeIcons.apple,
-                              color: Colors.white,
-                              size: 24.0,
-                            ),
-                          ),
-                          Container(
-                            width: 40.0,
-                            height: 40.0,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF0F1113),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 5.0,
-                                  color: Color(0x3314181B),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              shape: BoxShape.circle,
-                            ),
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: FaIcon(
-                              FontAwesomeIcons.facebookF,
-                              color: Colors.white,
-                              size: 24.0,
-                            ),
-                          ),
-                          Container(
-                            width: 40.0,
-                            height: 40.0,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF0F1113),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 5.0,
-                                  color: Color(0x3314181B),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              shape: BoxShape.circle,
-                            ),
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Icon(
-                              Icons.phone_sharp,
-                              color: Colors.white,
-                              size: 24.0,
                             ),
                           ),
                         ],

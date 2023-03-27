@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/forgot/forgot_widget.dart';
 import '/main.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login01_model.dart';
@@ -111,7 +110,7 @@ class _Login01WidgetState extends State<Login01Widget> {
                                 children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 20.0, 20.0, 0.0),
+                                        20.0, 10.0, 20.0, 0.0),
                                     child: TextFormField(
                                       controller: _model.emailAddressController,
                                       obscureText: false,
@@ -122,7 +121,7 @@ class _Login01WidgetState extends State<Login01Widget> {
                                             .override(
                                               fontFamily: 'Outfit',
                                               color: Color(0xFF57636C),
-                                              fontSize: 18.0,
+                                              fontSize: 16.0,
                                               fontWeight: FontWeight.w600,
                                             ),
                                         hintText: 'Enter your email...',
@@ -131,8 +130,8 @@ class _Login01WidgetState extends State<Login01Widget> {
                                             .override(
                                               fontFamily: 'Outfit',
                                               color: Color(0xFF57636C),
-                                              fontSize: 14.0,
-                                              fontWeight: FontWeight.normal,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -177,8 +176,8 @@ class _Login01WidgetState extends State<Login01Widget> {
                                           .override(
                                             fontFamily: 'Outfit',
                                             color: Color(0xFF0F1113),
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                       maxLines: null,
                                       validator: _model
@@ -188,7 +187,7 @@ class _Login01WidgetState extends State<Login01Widget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 12.0, 20.0, 0.0),
+                                        20.0, 30.0, 20.0, 0.0),
                                     child: TextFormField(
                                       controller: _model.passwordController,
                                       obscureText: !_model.passwordVisibility,
@@ -199,7 +198,7 @@ class _Login01WidgetState extends State<Login01Widget> {
                                             .override(
                                               fontFamily: 'Outfit',
                                               color: Color(0xFF57636C),
-                                              fontSize: 18.0,
+                                              fontSize: 16.0,
                                               fontWeight: FontWeight.w600,
                                             ),
                                         hintText: 'Enter your password...',
@@ -208,8 +207,8 @@ class _Login01WidgetState extends State<Login01Widget> {
                                             .override(
                                               fontFamily: 'Outfit',
                                               color: Color(0xFF57636C),
-                                              fontSize: 14.0,
-                                              fontWeight: FontWeight.normal,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -269,8 +268,8 @@ class _Login01WidgetState extends State<Login01Widget> {
                                           .override(
                                             fontFamily: 'Outfit',
                                             color: Color(0xFF0F1113),
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                       validator: _model
                                           .passwordControllerValidator
@@ -365,132 +364,6 @@ class _Login01WidgetState extends State<Login01Widget> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 0.0, 20.0, 12.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 12.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Or use a social account to login',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Lexend Deca',
-                                                  color: Color(0x98FFFFFF),
-                                                  fontSize: 14.0,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 8.0, 24.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF0F1113),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 5.0,
-                                                color: Color(0x3314181B),
-                                                offset: Offset(0.0, 2.0),
-                                              )
-                                            ],
-                                            shape: BoxShape.circle,
-                                          ),
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.google,
-                                            color: Colors.white,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF0F1113),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 5.0,
-                                                color: Color(0x3314181B),
-                                                offset: Offset(0.0, 2.0),
-                                              )
-                                            ],
-                                            shape: BoxShape.circle,
-                                          ),
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.apple,
-                                            color: Colors.white,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF0F1113),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 5.0,
-                                                color: Color(0x3314181B),
-                                                offset: Offset(0.0, 2.0),
-                                              )
-                                            ],
-                                            shape: BoxShape.circle,
-                                          ),
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.facebookF,
-                                            color: Colors.white,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF0F1113),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 5.0,
-                                                color: Color(0x3314181B),
-                                                offset: Offset(0.0, 2.0),
-                                              )
-                                            ],
-                                            shape: BoxShape.circle,
-                                          ),
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Icon(
-                                            Icons.phone_sharp,
-                                            color: Colors.white,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -500,6 +373,16 @@ class _Login01WidgetState extends State<Login01Widget> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
+                                  Text(
+                                    'By providing your Personal Data to us, you consent to us processing your Personal Data in accordance with this Privacy Policy, and you confirm that all Personal Data provided by you is accurate and complete, and that none of it is misleading or out of date. You will promptly update us in the event of any change to your Personal Data.\n\nWe may reject access request if any exception or prohibition under the PDPA apply.\n',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                  ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 24.0, 0.0, 0.0),
@@ -537,140 +420,6 @@ class _Login01WidgetState extends State<Login01Widget> {
                                           width: 1.0,
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 50.0, 20.0, 12.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 24.0, 5.0, 20.0),
-                                            child: Text(
-                                              'Or Sign up using a social account or phone number',
-                                              textAlign: TextAlign.center,
-                                              maxLines: 3,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .black600,
-                                                    fontSize: 14.0,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 8.0, 24.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF0F1113),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 5.0,
-                                                color: Color(0x3314181B),
-                                                offset: Offset(0.0, 2.0),
-                                              )
-                                            ],
-                                            shape: BoxShape.circle,
-                                          ),
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.google,
-                                            color: Colors.white,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF0F1113),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 5.0,
-                                                color: Color(0x3314181B),
-                                                offset: Offset(0.0, 2.0),
-                                              )
-                                            ],
-                                            shape: BoxShape.circle,
-                                          ),
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.apple,
-                                            color: Colors.white,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF0F1113),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 5.0,
-                                                color: Color(0x3314181B),
-                                                offset: Offset(0.0, 2.0),
-                                              )
-                                            ],
-                                            shape: BoxShape.circle,
-                                          ),
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.facebookF,
-                                            color: Colors.white,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFF0F1113),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 5.0,
-                                                color: Color(0x3314181B),
-                                                offset: Offset(0.0, 2.0),
-                                              )
-                                            ],
-                                            shape: BoxShape.circle,
-                                          ),
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Icon(
-                                            Icons.phone_sharp,
-                                            color: Colors.white,
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                      ],
                                     ),
                                   ),
                                 ],

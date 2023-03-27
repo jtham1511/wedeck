@@ -214,6 +214,7 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                         fontWeight: FontWeight.normal,
                       ),
                   maxLines: null,
+                  keyboardType: TextInputType.emailAddress,
                   validator: _model.emailAddressControllerValidator
                       .asValidator(context),
                 ),

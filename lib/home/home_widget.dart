@@ -171,8 +171,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                   child: Image.asset(
                     'assets/images/Coupon_03.png',
                     width: MediaQuery.of(context).size.width * 1.0,
-                    height: 110.0,
-                    fit: BoxFit.contain,
+                    height: 180.0,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ],
