@@ -72,7 +72,7 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                             size: 24.0,
                           ),
                           onPressed: () async {
-                            context.pop();
+                            Navigator.pop(context);
                           },
                         ),
                       ),

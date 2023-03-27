@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/forgot/forgot_widget.dart';
+import '/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +77,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               size: 24.0,
                             ),
                             onPressed: () async {
-                              context.pop();
+                              Navigator.pop(context);
                             },
                           ),
                         ),
@@ -202,7 +204,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                   contentPadding:
                       EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 20.0, 24.0),
                 ),
-                style: FlutterFlowTheme.of(context).bodyText1,
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'Poppins',
+                      fontSize: 18.0,
+                    ),
                 maxLines: null,
                 validator:
                     _model.emailAddressControllerValidator.asValidator(context),
@@ -285,7 +290,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ),
                   ),
                 ),
-                style: FlutterFlowTheme.of(context).bodyText1,
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'Poppins',
+                      fontSize: 18.0,
+                    ),
                 validator: _model.passwordLoginControllerValidator
                     .asValidator(context),
               ),
@@ -295,8 +303,6 @@ class _LoginWidgetState extends State<LoginWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
             child: FFButtonWidget(
               onPressed: () async {
-                GoRouter.of(context).prepareAuthEvent();
-
                 final user = await signInWithEmail(
                   context,
                   _model.emailAddressController.text,
@@ -306,7 +312,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                   return;
                 }
 
-                context.goNamedAuth('home', mounted);
+                await Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NavBarPage(initialPage: 'home'),
+                  ),
+                  (r) => false,
+                );
               },
               text: 'Login',
               options: FFButtonOptions(
@@ -332,7 +344,12 @@ class _LoginWidgetState extends State<LoginWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(30.0, 44.0, 9.0, 0.0),
             child: FFButtonWidget(
               onPressed: () async {
-                context.pushNamed('forgot');
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ForgotWidget(),
+                  ),
+                );
               },
               text: 'Forgot Password?',
               options: FFButtonOptions(

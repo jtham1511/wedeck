@@ -1,7 +1,10 @@
 import '/auth/auth_util.dart';
+import '/create_acc_copy/create_acc_copy_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/privacy/privacy_widget.dart';
+import '/profile_edit/profile_edit_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -1,7 +1,10 @@
 import '/auth/auth_util.dart';
+import '/create_acc_copy/create_acc_copy_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/privacy/privacy_widget.dart';
+import '/profile_edit/profile_edit_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,7 +59,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
             size: 30.0,
           ),
           onPressed: () async {
-            context.safePop();
+            Navigator.pop(context);
           },
         ),
         title: Text(
@@ -387,7 +390,12 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: InkWell(
                         onTap: () async {
-                          context.pushNamed('profile_edit');
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProfileEditWidget(),
+                            ),
+                          );
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -518,34 +526,44 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Icon(
-                            Icons.privacy_tip_rounded,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 24.0,
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              'Terms of Service',
-                              style: FlutterFlowTheme.of(context).bodyText2,
+                      child: InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PrivacyWidget(),
                             ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(0.9, 0.0),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 18.0,
+                          );
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Icon(
+                              Icons.privacy_tip_rounded,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 24.0,
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Terms of Service & Privacy Policy',
+                                style: FlutterFlowTheme.of(context).bodyText2,
                               ),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: Align(
+                                alignment: AlignmentDirectional(0.9, 0.0),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 18.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -642,11 +660,14 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: InkWell(
                         onTap: () async {
-                          GoRouter.of(context).prepareAuthEvent();
                           await signOut();
-                          GoRouter.of(context).clearRedirectLocation();
-
-                          context.goNamedAuth('create_accCopy', mounted);
+                          await Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CreateAccCopyWidget(),
+                            ),
+                            (r) => false,
+                          );
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.max,

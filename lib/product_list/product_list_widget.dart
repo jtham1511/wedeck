@@ -153,6 +153,7 @@ class _ProductListWidgetState extends State<ProductListWidget>
                                                     DecimalType.periodDecimal,
                                                 currency: '\$',
                                               ),
+                                              textAlign: TextAlign.end,
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .subtitle1

@@ -1,7 +1,10 @@
 import '/auth/auth_util.dart';
+import '/create_acc_copy/create_acc_copy_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/forgot/forgot_widget.dart';
+import '/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -279,8 +282,6 @@ class _Login01WidgetState extends State<Login01Widget> {
                                         0.0, 24.0, 0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        GoRouter.of(context).prepareAuthEvent();
-
                                         final user = await signInWithEmail(
                                           context,
                                           _model.emailAddressController.text,
@@ -290,7 +291,14 @@ class _Login01WidgetState extends State<Login01Widget> {
                                           return;
                                         }
 
-                                        context.goNamedAuth('home', mounted);
+                                        await Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                NavBarPage(initialPage: 'home'),
+                                          ),
+                                          (r) => false,
+                                        );
                                       },
                                       text: 'Sign In',
                                       options: FFButtonOptions(
@@ -323,7 +331,13 @@ class _Login01WidgetState extends State<Login01Widget> {
                                         0.0, 20.0, 0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        context.pushNamed('forgot');
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgotWidget(),
+                                          ),
+                                        );
                                       },
                                       text: 'Forgot Password?',
                                       options: FFButtonOptions(
@@ -491,7 +505,13 @@ class _Login01WidgetState extends State<Login01Widget> {
                                         0.0, 24.0, 0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        context.pushNamed('create_accCopy');
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                CreateAccCopyWidget(),
+                                          ),
+                                        );
                                       },
                                       text: 'Create Account',
                                       options: FFButtonOptions(

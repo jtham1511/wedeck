@@ -3,6 +3,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/login/login_widget.dart';
+import '/main.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -720,7 +722,6 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                         children: [
                           FFButtonWidget(
                             onPressed: () async {
-                              GoRouter.of(context).prepareAuthEvent();
                               if (_model.passwordController.text !=
                                   _model.passwordconfirmController.text) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -752,7 +753,14 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   .doc(user.uid)
                                   .update(usersCreateData);
 
-                              context.goNamedAuth('home', mounted);
+                              await Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      NavBarPage(initialPage: 'home'),
+                                ),
+                                (r) => false,
+                              );
                             },
                             text: 'Create Account',
                             options: FFButtonOptions(
@@ -800,16 +808,14 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                           ),
                           FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed(
-                                'login',
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType:
-                                        PageTransitionType.leftToRight,
-                                    duration: Duration(milliseconds: 150),
-                                  ),
-                                },
+                              await Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.leftToRight,
+                                  duration: Duration(milliseconds: 150),
+                                  reverseDuration: Duration(milliseconds: 150),
+                                  child: LoginWidget(),
+                                ),
                               );
                             },
                             text: 'Log In',

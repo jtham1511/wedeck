@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_count_controller.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -48,7 +49,7 @@ class _G1FlutedSilverFirWidgetState extends State<G1FlutedSilverFirWidget>
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
-            context.pop();
+            Navigator.pop(context);
           },
           child: Icon(
             Icons.arrow_back_rounded,
@@ -247,7 +248,12 @@ class _G1FlutedSilverFirWidgetState extends State<G1FlutedSilverFirWidget>
               ),
               child: FFButtonWidget(
                 onPressed: () async {
-                  context.pushNamed('home');
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NavBarPage(initialPage: 'home'),
+                    ),
+                  );
                 },
                 text: 'Home',
                 options: FFButtonOptions(

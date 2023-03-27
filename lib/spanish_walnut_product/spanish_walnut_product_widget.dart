@@ -48,7 +48,7 @@ class _SpanishWalnutProductWidgetState extends State<SpanishWalnutProductWidget>
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
-            context.pop();
+            Navigator.pop(context);
           },
           child: Icon(
             Icons.arrow_back_rounded,

@@ -79,7 +79,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                         size: 30.0,
                       ),
                       onPressed: () async {
-                        context.pop();
+                        Navigator.pop(context);
                       },
                     ),
                     Text(
@@ -481,7 +481,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                       email: _model.emailaddressController.text,
                     );
                     await currentUserReference!.update(usersUpdateData);
-                    context.safePop();
+                    Navigator.pop(context);
                   },
                   text: 'Save Changes',
                   options: FFButtonOptions(
