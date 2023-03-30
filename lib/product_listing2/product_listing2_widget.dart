@@ -45,7 +45,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
         automaticallyImplyLeading: false,
         title: Text(
           'Product List',
-          style: FlutterFlowTheme.of(context).title1.override(
+          style: FlutterFlowTheme.of(context).displaySmall.override(
                 fontFamily: 'Poppins',
                 fontSize: 22.0,
               ),
@@ -84,7 +84,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: 'Type to search here...',
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                        hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color:
@@ -119,7 +119,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                           color: Color(0xFF95A1AC),
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
                       maxLines: null,
                       validator: _model.searchFieldControllerValidator
                           .asValidator(context),
@@ -140,7 +140,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                       width: 50.0,
                       height: 50.0,
                       child: CircularProgressIndicator(
-                        color: FlutterFlowTheme.of(context).primaryColor,
+                        color: FlutterFlowTheme.of(context).primary,
                       ),
                     ),
                   );
@@ -200,7 +200,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                                         child: Text(
                                           listViewProductRecord.name!,
                                           style: FlutterFlowTheme.of(context)
-                                              .title1
+                                              .displaySmall
                                               .override(
                                                 fontFamily: 'Lexend Deca',
                                                 color: Colors.white,
@@ -231,7 +231,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                                           child: Text(
                                             listViewProductRecord.description!,
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
+                                                .bodySmall
                                                 .override(
                                                   fontFamily: 'Lexend Deca',
                                                   color: Color(0xFF39D2C0),
@@ -309,7 +309,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .title3
+                                                      .headlineSmall
                                                       .override(
                                                         fontFamily:
                                                             'Lexend Deca',
@@ -326,7 +326,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                                         Text(
                                           '/ ${listViewProductRecord.uom}',
                                           style: FlutterFlowTheme.of(context)
-                                              .title3
+                                              .headlineSmall
                                               .override(
                                                 fontFamily: 'Poppins',
                                                 color:

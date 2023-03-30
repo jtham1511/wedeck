@@ -64,7 +64,9 @@ class _MyQrWidgetState extends State<MyQrWidget> {
                         child: AuthUserStreamWidget(
                           builder: (context) => Text(
                             currentUserDisplayName,
-                            style: FlutterFlowTheme.of(context).title3.override(
+                            style: FlutterFlowTheme.of(context)
+                                .headlineSmall
+                                .override(
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -80,7 +82,7 @@ class _MyQrWidgetState extends State<MyQrWidget> {
                             Text(
                               'WeDeck ID : ',
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Poppins',
                                     fontSize: 12.0,
@@ -90,7 +92,7 @@ class _MyQrWidgetState extends State<MyQrWidget> {
                               builder: (context) => Text(
                                 valueOrDefault(
                                     currentUserDocument?.memberId, ''),
-                                style: FlutterFlowTheme.of(context).bodyText1,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),
                           ],
@@ -160,7 +162,7 @@ class _MyQrWidgetState extends State<MyQrWidget> {
                                   'Please scan your WeDeck ID at our participating outlet to earn you loyalty reward point and enjoy exclusive disount',
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Poppins',
                                         color: FlutterFlowTheme.of(context)

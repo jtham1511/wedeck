@@ -84,12 +84,13 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                     ),
                     Text(
                       'Edit your Profile',
-                      style: FlutterFlowTheme.of(context).title2.override(
-                            fontFamily: 'Outfit',
-                            color: Color(0xFF101213),
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      style:
+                          FlutterFlowTheme.of(context).headlineMedium.override(
+                                fontFamily: 'Outfit',
+                                color: Color(0xFF101213),
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.w500,
+                              ),
                     ),
                   ],
                 ),
@@ -114,14 +115,14 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Your Name',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                    labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal,
                         ),
                     hintText: 'Your Name',
-                    hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                    hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
                           fontSize: 14.0,
@@ -160,7 +161,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                     contentPadding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
                   ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Outfit',
                         color: Color(0xFF101213),
                         fontSize: 14.0,
@@ -183,14 +184,14 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                 obscureText: false,
                 decoration: InputDecoration(
                   labelText: 'Email Address',
-                  labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                  labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
                         fontFamily: 'Outfit',
                         color: Color(0xFF57636C),
                         fontSize: 14.0,
                         fontWeight: FontWeight.normal,
                       ),
                   hintText: 'Your Name',
-                  hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                  hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
                         fontFamily: 'Outfit',
                         color: Color(0xFF57636C),
                         fontSize: 14.0,
@@ -229,7 +230,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   contentPadding:
                       EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
                 ),
-                style: FlutterFlowTheme.of(context).bodyText1.override(
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Outfit',
                       color: Color(0xFF101213),
                       fontSize: 14.0,
@@ -252,14 +253,14 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Handphone Number',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                    labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal,
                         ),
                     hintText: currentPhoneNumber,
-                    hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                    hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
                           fontSize: 14.0,
@@ -298,7 +299,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                     contentPadding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
                   ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Outfit',
                         color: Color(0xFF101213),
                         fontSize: 14.0,
@@ -323,14 +324,14 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Company',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                    labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal,
                         ),
                     hintText: valueOrDefault(currentUserDocument?.company, ''),
-                    hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                    hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
                           fontSize: 14.0,
@@ -369,7 +370,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                     contentPadding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
                   ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Outfit',
                         color: Color(0xFF101213),
                         fontSize: 14.0,
@@ -393,14 +394,14 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Member ID',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                    labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold,
                         ),
                     hintText: currentPhoneNumber,
-                    hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                    hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
                           fontSize: 20.0,
@@ -439,7 +440,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                     contentPadding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
                   ),
-                  style: FlutterFlowTheme.of(context).title3.override(
+                  style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Poppins',
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
@@ -504,12 +505,13 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                     iconPadding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: Color(0xFF4B39EF),
-                    textStyle: FlutterFlowTheme.of(context).subtitle1.override(
-                          fontFamily: 'Outfit',
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.normal,
-                        ),
+                    textStyle:
+                        FlutterFlowTheme.of(context).titleMedium.override(
+                              fontFamily: 'Outfit',
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.normal,
+                            ),
                     elevation: 2.0,
                     borderSide: BorderSide(
                       color: Colors.transparent,

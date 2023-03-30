@@ -1,4 +1,5 @@
 import '/auth/auth_util.dart';
+import '/backend/push_notifications/push_notifications_handler.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -6,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/forgot/forgot_widget.dart';
 import '/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login_model.dart';
@@ -88,11 +88,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 4.0, 0.0, 0.0, 0.0),
                             child: Text(
                               'Back',
-                              style:
-                                  FlutterFlowTheme.of(context).title1.override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 16.0,
-                                      ),
+                              style: FlutterFlowTheme.of(context)
+                                  .displaySmall
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16.0,
+                                  ),
                             ),
                           ),
                         ),
@@ -104,7 +105,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                     child: Text(
                       'Login',
-                      style: FlutterFlowTheme.of(context).title1.override(
+                      style: FlutterFlowTheme.of(context).displaySmall.override(
                             fontFamily: 'Poppins',
                             fontSize: 28.0,
                           ),
@@ -133,7 +134,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         EdgeInsetsDirectional.fromSTEB(4.0, 50.0, 4.0, 4.0),
                     child: Text(
                       'Access your account by logging in below.',
-                      style: FlutterFlowTheme.of(context).subtitle2.override(
+                      style: FlutterFlowTheme.of(context).titleSmall.override(
                             fontFamily: 'Poppins',
                             color: FlutterFlowTheme.of(context).secondaryText,
                           ),
@@ -164,14 +165,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                 obscureText: false,
                 decoration: InputDecoration(
                   labelText: 'Your email address...',
-                  labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                  labelStyle: FlutterFlowTheme.of(context).bodySmall,
                   hintText: 'Enter your email...',
-                  hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Lexend Deca',
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
-                      ),
+                  hintStyle: FlutterFlowTheme.of(context).bodySmall,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0x00000000),
@@ -205,7 +201,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   contentPadding:
                       EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 20.0, 24.0),
                 ),
-                style: FlutterFlowTheme.of(context).bodyText1.override(
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Poppins',
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600,
@@ -214,9 +210,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                 keyboardType: TextInputType.emailAddress,
                 validator:
                     _model.emailAddressControllerValidator.asValidator(context),
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))
-                ],
               ),
             ),
           ),
@@ -241,14 +234,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                 obscureText: !_model.passwordLoginVisibility,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                  labelStyle: FlutterFlowTheme.of(context).bodySmall,
                   hintText: 'Please enter your password...',
-                  hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Lexend Deca',
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
-                      ),
+                  hintStyle: FlutterFlowTheme.of(context).bodySmall,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0x00000000),
@@ -296,7 +284,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ),
                   ),
                 ),
-                style: FlutterFlowTheme.of(context).bodyText1.override(
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Poppins',
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600,
@@ -323,7 +311,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                 await Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NavBarPage(initialPage: 'home'),
+                    builder: (context) => PushNotificationsHandler(
+                      child: NavBarPage(initialPage: 'home'),
+                    ),
                   ),
                   (r) => false,
                 );
@@ -335,7 +325,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).primaryText,
-                textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: 'Poppins',
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       fontSize: 16.0,
@@ -362,11 +352,11 @@ class _LoginWidgetState extends State<LoginWidget> {
               text: 'Forgot Password?',
               options: FFButtonOptions(
                 width: 170.0,
-                height: 50.0,
+                height: 70.0,
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).primaryBackground,
-                textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: 'Poppins',
                       color: FlutterFlowTheme.of(context).secondaryText,
                     ),

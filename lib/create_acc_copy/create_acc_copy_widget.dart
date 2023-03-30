@@ -1,5 +1,6 @@
 import '/auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_handler.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -96,7 +97,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   'Get Started',
                                   textAlign: TextAlign.end,
                                   style: FlutterFlowTheme.of(context)
-                                      .title1
+                                      .displaySmall
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: Color(0xFF0F1113),
@@ -111,7 +112,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 child: Text(
                                   'Use the form below to get started.',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: Color(0xFF57636C),
@@ -144,7 +145,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                               decoration: InputDecoration(
                                 labelText: 'Email Address',
                                 labelStyle: FlutterFlowTheme.of(context)
-                                    .bodyText2
+                                    .bodySmall
                                     .override(
                                       fontFamily: 'Outfit',
                                       color: Color(0xFF57636C),
@@ -153,7 +154,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                     ),
                                 hintText: 'Enter your email here...',
                                 hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyText2
+                                    .bodySmall
                                     .override(
                                       fontFamily: 'Outfit',
                                       color: Color(0xFF57636C),
@@ -209,7 +210,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                     : null,
                               ),
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: FlutterFlowTheme.of(context)
@@ -249,7 +250,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 decoration: InputDecoration(
                                   labelText: 'Your Name',
                                   labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: Color(0xFF57636C),
@@ -258,7 +259,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                       ),
                                   hintText: 'Enter your name here...',
                                   hintStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: Color(0xFF57636C),
@@ -314,7 +315,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                       : null,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: 'Outfit',
                                       color: FlutterFlowTheme.of(context)
@@ -353,7 +354,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 decoration: InputDecoration(
                                   labelText: 'Contact Hp',
                                   labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: Color(0xFF57636C),
@@ -362,7 +363,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                       ),
                                   hintText: 'Enter your HP number here...',
                                   hintStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: Color(0xFF57636C),
@@ -404,7 +405,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                           16.0, 24.0, 0.0, 24.0),
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: 'Outfit',
                                       color: FlutterFlowTheme.of(context)
@@ -445,7 +446,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 decoration: InputDecoration(
                                   labelText: 'Company',
                                   labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: Color(0xFF57636C),
@@ -454,7 +455,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                       ),
                                   hintText: 'Enter your Company here...',
                                   hintStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: Color(0xFF57636C),
@@ -496,7 +497,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                           16.0, 24.0, 0.0, 24.0),
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: 'Outfit',
                                       color: FlutterFlowTheme.of(context)
@@ -507,10 +508,6 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 maxLines: null,
                                 validator: _model.companynameControllerValidator
                                     .asValidator(context),
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp('[a-zA-Z0-9]'))
-                                ],
                               ),
                             ),
                           ),
@@ -531,7 +528,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                               decoration: InputDecoration(
                                 labelText: 'Password',
                                 labelStyle: FlutterFlowTheme.of(context)
-                                    .bodyText2
+                                    .bodySmall
                                     .override(
                                       fontFamily: 'Outfit',
                                       color: Color(0xFF57636C),
@@ -540,7 +537,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                     ),
                                 hintText: 'Enter your password here...',
                                 hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyText2
+                                    .bodySmall
                                     .override(
                                       fontFamily: 'Outfit',
                                       color: Color(0xFF57636C),
@@ -595,7 +592,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 ),
                               ),
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: FlutterFlowTheme.of(context)
@@ -606,10 +603,6 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                               keyboardType: TextInputType.visiblePassword,
                               validator: _model.passwordControllerValidator
                                   .asValidator(context),
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp('[a-zA-Z0-9]'))
-                              ],
                             ),
                           ),
                         ],
@@ -632,7 +625,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   decoration: InputDecoration(
                                     labelText: 'Confirm Password',
                                     labelStyle: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Outfit',
                                           color: Color(0xFF57636C),
@@ -642,7 +635,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                     hintText:
                                         'Please Confirm your password here...',
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Outfit',
                                           color: Color(0xFF57636C),
@@ -698,7 +691,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                     ),
                                   ),
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: FlutterFlowTheme.of(context)
@@ -710,10 +703,6 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   validator: _model
                                       .passwordconfirmControllerValidator
                                       .asValidator(context),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('[a-zA-Z0-9]'))
-                                  ],
                                 ),
                               ],
                             ),
@@ -723,7 +712,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                               child: Text(
                                 'By providing your Personal Data to us, you consent to us processing your Personal Data in accordance with this Privacy Policy, and you confirm that all Personal Data provided by you is accurate and complete, and that none of it is misleading or out of date. You will promptly update us in the event of any change to your Personal Data.\n\nWe may reject access request if any exception or prohibition under the PDPA apply.',
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: 'Poppins',
                                       fontSize: 10.0,
@@ -779,7 +768,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      NavBarPage(initialPage: 'home'),
+                                      PushNotificationsHandler(
+                                    child: NavBarPage(initialPage: 'home'),
+                                  ),
                                 ),
                                 (r) => false,
                               );
@@ -794,7 +785,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   0.0, 0.0, 0.0, 0.0),
                               color: Color(0xFF4B39EF),
                               textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle1
+                                  .titleMedium
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: Colors.white,
@@ -820,13 +811,14 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                         children: [
                           Text(
                             'Already have an account?',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFF0F1113),
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: Color(0xFF0F1113),
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
                           ),
                           FFButtonWidget(
                             onPressed: () async {
@@ -850,7 +842,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   0.0, 0.0, 0.0, 0.0),
                               color: Color(0x00FFFFFF),
                               textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
+                                  .titleSmall
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: Color(0xFF39D2C0),

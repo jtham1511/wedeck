@@ -1,8 +1,9 @@
 import '/auth/auth_util.dart';
-import '/create_acc_copy/create_acc_copy_widget.dart';
+import '/close_account/close_account_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/login_01/login01_widget.dart';
 import '/privacy/privacy_widget.dart';
 import '/profile_edit/profile_edit_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -64,7 +65,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
         ),
         title: Text(
           'Profile',
-          style: FlutterFlowTheme.of(context).subtitle2.override(
+          style: FlutterFlowTheme.of(context).titleSmall.override(
                 fontFamily: 'Poppins',
                 fontSize: 20.0,
               ),
@@ -90,7 +91,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 0.0,
-                          color: FlutterFlowTheme.of(context).tertiaryColor,
+                          color: FlutterFlowTheme.of(context).tertiary,
                           offset: Offset(0.0, 1.0),
                         )
                       ],
@@ -103,7 +104,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                         children: [
                           Card(
                             clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: FlutterFlowTheme.of(context).secondaryColor,
+                            color: FlutterFlowTheme.of(context).secondary,
                             elevation: 2.0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
@@ -136,7 +137,8 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                 AuthUserStreamWidget(
                                   builder: (context) => Text(
                                     currentUserDisplayName,
-                                    style: FlutterFlowTheme.of(context).title3,
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineSmall,
                                   ),
                                 ),
                                 Padding(
@@ -145,7 +147,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                   child: Text(
                                     currentUserEmail,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText2,
+                                        FlutterFlowTheme.of(context).bodySmall,
                                   ),
                                 ),
                               ],
@@ -160,7 +162,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
                   child: Text(
                     'Account',
-                    style: FlutterFlowTheme.of(context).subtitle2,
+                    style: FlutterFlowTheme.of(context).titleSmall,
                   ),
                 ),
                 Padding(
@@ -197,7 +199,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
                               'Payment Options',
-                              style: FlutterFlowTheme.of(context).bodyText2,
+                              style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
                           Padding(
@@ -207,7 +209,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               'Coming Soon !!!',
                               textAlign: TextAlign.end,
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
                                     fontFamily: 'Poppins',
                                     color:
@@ -265,7 +267,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
                               'Country',
-                              style: FlutterFlowTheme.of(context).bodyText2,
+                              style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
                           Padding(
@@ -275,7 +277,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               'Coming Soon !!!',
                               textAlign: TextAlign.end,
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
                                     fontFamily: 'Poppins',
                                     color:
@@ -333,7 +335,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
                               'Notification Settings',
-                              style: FlutterFlowTheme.of(context).bodyText2,
+                              style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
                           Padding(
@@ -343,7 +345,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               'Coming Soon !!!',
                               textAlign: TextAlign.end,
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
                                     fontFamily: 'Poppins',
                                     color:
@@ -410,7 +412,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'Edit Profile',
-                                style: FlutterFlowTheme.of(context).bodyText2,
+                                style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),
                             Expanded(
@@ -434,7 +436,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
                   child: Text(
                     'General',
-                    style: FlutterFlowTheme.of(context).subtitle2,
+                    style: FlutterFlowTheme.of(context).titleSmall,
                   ),
                 ),
                 Padding(
@@ -485,7 +487,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'Support',
-                                style: FlutterFlowTheme.of(context).bodyText2,
+                                style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),
                             Expanded(
@@ -548,7 +550,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'Terms of Service & Privacy Policy',
-                                style: FlutterFlowTheme.of(context).bodyText2,
+                                style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),
                             Expanded(
@@ -603,7 +605,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
                               'Invite Friends',
-                              style: FlutterFlowTheme.of(context).bodyText2,
+                              style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
                           Padding(
@@ -613,7 +615,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               'Coming Soon !!!',
                               textAlign: TextAlign.end,
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
                                     fontFamily: 'Poppins',
                                     color:
@@ -660,11 +662,75 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: InkWell(
                         onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CloseAccountWidget(),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(
+                              Icons.group_add,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 24.0,
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Close Account',
+                                style: FlutterFlowTheme.of(context).bodySmall,
+                              ),
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: AlignmentDirectional(0.9, 0.0),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 18.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                  child: Container(
+                    width: double.infinity,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 5.0,
+                          color: Color(0x3416202A),
+                          offset: Offset(0.0, 2.0),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(12.0),
+                      shape: BoxShape.rectangle,
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                      child: InkWell(
+                        onTap: () async {
                           await signOut();
                           await Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CreateAccCopyWidget(),
+                              builder: (context) => Login01Widget(),
                             ),
                             (r) => false,
                           );
@@ -683,7 +749,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'Logout',
-                                style: FlutterFlowTheme.of(context).bodyText2,
+                                style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),
                             Expanded(

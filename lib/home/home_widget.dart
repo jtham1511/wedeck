@@ -92,20 +92,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   fit: BoxFit.fitWidth,
                                 ),
                               ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 10.0, 0.0),
-                                child: AuthUserStreamWidget(
-                                  builder: (context) => Text(
-                                    'Hello ${currentUserDisplayName}',
-                                    textAlign: TextAlign.end,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                  ),
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -114,23 +100,42 @@ class _HomeWidgetState extends State<HomeWidget> {
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            280.0, 85.0, 0.0, 0.0),
-                        child: AuthUserStreamWidget(
-                          builder: (context) => Text(
-                            'Reward Points :${valueOrDefault<String>(
-                              valueOrDefault(currentUserDocument?.rewardPts, 0)
-                                  .toString(),
-                              '100',
-                            )}',
-                            textAlign: TextAlign.end,
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w300,
-                                    ),
+                      Align(
+                        alignment: AlignmentDirectional(0.7, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 75.0, 0.0, 0.0),
+                          child: AuthUserStreamWidget(
+                            builder: (context) => Text(
+                              'Hello ${currentUserDisplayName}',
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(0.7, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 20.0),
+                          child: AuthUserStreamWidget(
+                            builder: (context) => Text(
+                              'Reward Points :${valueOrDefault<String>(
+                                valueOrDefault(
+                                        currentUserDocument?.rewardPts, 0)
+                                    .toString(),
+                                '100',
+                              )}',
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                            ),
                           ),
                         ),
                       ),
@@ -150,7 +155,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 0.0, 12.0),
                       child: Text(
                         'Today\'s Deals',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lexend Deca',
                               color: Color(0xFF090F13),
                               fontSize: 14.0,
@@ -188,7 +193,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 0.0, 12.0),
                       child: Text(
                         'Recommended for you',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lexend Deca',
                               color: Color(0xFF090F13),
                               fontSize: 14.0,
@@ -215,7 +220,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       child: Text(
                         'View All',
                         textAlign: TextAlign.end,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lexend Deca',
                               color: Color(0xFF4B39EF),
                               fontSize: 14.0,
@@ -303,7 +308,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   'Peruvian Teak Straight',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF090F13),
@@ -327,7 +332,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   '\$ 7.50/ft²',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF95A1AC),
@@ -409,7 +414,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   'Roman Antique Straight',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF090F13),
@@ -433,7 +438,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   '\$ 7.50/ft²',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF95A1AC),
@@ -512,7 +517,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   'G1 Fluted Silver Fir',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF090F13),
@@ -536,7 +541,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   '\$ 6.50/ft²',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF95A1AC),
@@ -615,7 +620,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   'G1 Fluted Dark Ebony',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF090F13),
@@ -639,7 +644,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   '\$ 6.50/ft²',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF95A1AC),
@@ -718,7 +723,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   'G1 Fluted Walnut wpc',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF090F13),
@@ -742,7 +747,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   '\$ 6.50/ft²',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF95A1AC),
@@ -821,7 +826,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   'Chengal Ceiling',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF090F13),
@@ -845,7 +850,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   '\$ 2.99/ft²',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF95A1AC),
@@ -924,7 +929,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   'S3W6 Brasilian Ebony',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF090F13),
@@ -948,7 +953,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   '\$ 6.50/ft²',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF95A1AC),
@@ -1027,7 +1032,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   'S3W5 Brasilian Walnut',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF090F13),
@@ -1051,7 +1056,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   '\$ 6.50/ft²',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF95A1AC),
@@ -1130,7 +1135,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   'Solid Oak Skirting',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF090F13),
@@ -1154,7 +1159,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 child: Text(
                                   '\$ 1.50/ft',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Lexend Deca',
                                         color: Color(0xFF95A1AC),

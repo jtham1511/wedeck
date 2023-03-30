@@ -59,7 +59,7 @@ class _MagellanPeruvianTeakWidgetState extends State<MagellanPeruvianTeakWidget>
         ),
         title: Text(
           ' ',
-          style: FlutterFlowTheme.of(context).subtitle2.override(
+          style: FlutterFlowTheme.of(context).titleSmall.override(
                 fontFamily: 'Lexend Deca',
                 color: Color(0xFF151B1E),
                 fontSize: 16.0,
@@ -104,7 +104,9 @@ class _MagellanPeruvianTeakWidgetState extends State<MagellanPeruvianTeakWidget>
                       children: [
                         Text(
                           'Magellan Peruvian Teak',
-                          style: FlutterFlowTheme.of(context).title2.override(
+                          style: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .override(
                                 fontFamily: 'Outfit',
                                 color: Color(0xFF14181B),
                                 fontSize: 22.0,
@@ -115,13 +117,14 @@ class _MagellanPeruvianTeakWidgetState extends State<MagellanPeruvianTeakWidget>
                           child: Text(
                             '\$ 7.50/ft²',
                             textAlign: TextAlign.end,
-                            style:
-                                FlutterFlowTheme.of(context).subtitle1.override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFF14181B),
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: Color(0xFF14181B),
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
                           ),
                         ),
                       ],
@@ -140,7 +143,7 @@ class _MagellanPeruvianTeakWidgetState extends State<MagellanPeruvianTeakWidget>
                             child: Text(
                               'Our UltraShield Naturale Color comes in wood or straight grain. Magellan series of decking uses either hidden fasteners or screws for installation. Peruvian Teak Color.',
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: Color(0xFF57636C),
@@ -266,12 +269,13 @@ class _MagellanPeruvianTeakWidgetState extends State<MagellanPeruvianTeakWidget>
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: Color(0xFF4B39EF),
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 20.0,
                         fontWeight: FontWeight.w500,
                       ),
+                  elevation: 2.0,
                   borderSide: BorderSide(
                     color: Colors.transparent,
                     width: 1.0,

@@ -60,7 +60,7 @@ class _ChengalCeilingWidgetState extends State<ChengalCeilingWidget>
         ),
         title: Text(
           ' ',
-          style: FlutterFlowTheme.of(context).subtitle2.override(
+          style: FlutterFlowTheme.of(context).titleSmall.override(
                 fontFamily: 'Lexend Deca',
                 color: Color(0xFF151B1E),
                 fontSize: 16.0,
@@ -105,7 +105,9 @@ class _ChengalCeilingWidgetState extends State<ChengalCeilingWidget>
                       children: [
                         Text(
                           'Chengal Ceiling',
-                          style: FlutterFlowTheme.of(context).title2.override(
+                          style: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .override(
                                 fontFamily: 'Outfit',
                                 color: Color(0xFF14181B),
                                 fontSize: 22.0,
@@ -116,13 +118,14 @@ class _ChengalCeilingWidgetState extends State<ChengalCeilingWidget>
                           child: Text(
                             '\$ 2.99/ft²',
                             textAlign: TextAlign.end,
-                            style:
-                                FlutterFlowTheme.of(context).subtitle1.override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFF14181B),
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: Color(0xFF14181B),
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
                           ),
                         ),
                       ],
@@ -141,7 +144,7 @@ class _ChengalCeilingWidgetState extends State<ChengalCeilingWidget>
                             child: Text(
                               'Our Chengal is harvested from reputable and green source. It is an excellent termite proof option for carporch ceiling and absolutely headache free.\n\nDimensions: 12mmx70mm/95mm/145mm',
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: Color(0xFF57636C),
@@ -177,7 +180,7 @@ class _ChengalCeilingWidgetState extends State<ChengalCeilingWidget>
                               width: 130.0,
                               height: 50.0,
                               textStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: Color(0xFF14181B),
@@ -299,12 +302,13 @@ class _ChengalCeilingWidgetState extends State<ChengalCeilingWidget>
                     iconPadding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: Color(0xFF4B39EF),
-                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 20.0,
                           fontWeight: FontWeight.w500,
                         ),
+                    elevation: 2.0,
                     borderSide: BorderSide(
                       color: Colors.transparent,
                       width: 1.0,

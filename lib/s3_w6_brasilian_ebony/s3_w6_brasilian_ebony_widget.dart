@@ -59,7 +59,7 @@ class _S3W6BrasilianEbonyWidgetState extends State<S3W6BrasilianEbonyWidget>
         ),
         title: Text(
           ' ',
-          style: FlutterFlowTheme.of(context).subtitle2.override(
+          style: FlutterFlowTheme.of(context).titleSmall.override(
                 fontFamily: 'Lexend Deca',
                 color: Color(0xFF151B1E),
                 fontSize: 16.0,
@@ -104,7 +104,9 @@ class _S3W6BrasilianEbonyWidgetState extends State<S3W6BrasilianEbonyWidget>
                       children: [
                         Text(
                           'S3W6 Brasilian Ebony',
-                          style: FlutterFlowTheme.of(context).title2.override(
+                          style: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .override(
                                 fontFamily: 'Outfit',
                                 color: Color(0xFF14181B),
                                 fontSize: 22.0,
@@ -115,13 +117,14 @@ class _S3W6BrasilianEbonyWidgetState extends State<S3W6BrasilianEbonyWidget>
                           child: Text(
                             '\$ 6.50/ft²',
                             textAlign: TextAlign.end,
-                            style:
-                                FlutterFlowTheme.of(context).subtitle1.override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFF14181B),
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: Color(0xFF14181B),
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.normal,
+                                ),
                           ),
                         ),
                       ],
@@ -140,7 +143,7 @@ class _S3W6BrasilianEbonyWidgetState extends State<S3W6BrasilianEbonyWidget>
                             child: Text(
                               'Our S3 series of wood grain Ebony wpc deck is aesthetically pleasing and hardwearing. It is a Green label product and carries a 5 year warranty against Termites, splitting, Woodrot, decay and warping.\n\nDimensions: 22mmx146mmx2200mm.',
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: Color(0xFF57636C),
@@ -266,12 +269,13 @@ class _S3W6BrasilianEbonyWidgetState extends State<S3W6BrasilianEbonyWidget>
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: Color(0xFF4B39EF),
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 20.0,
                         fontWeight: FontWeight.w500,
                       ),
+                  elevation: 2.0,
                   borderSide: BorderSide(
                     color: Colors.transparent,
                     width: 1.0,

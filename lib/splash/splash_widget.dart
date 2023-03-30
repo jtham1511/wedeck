@@ -75,7 +75,7 @@ class _SplashWidgetState extends State<SplashWidget>
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: Text(
                   'Welcome to WeDeck',
-                  style: FlutterFlowTheme.of(context).title1.override(
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
                         fontFamily: 'Lexend Deca',
                         color: Colors.white,
                         fontSize: 28.0,
@@ -87,7 +87,7 @@ class _SplashWidgetState extends State<SplashWidget>
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 120.0),
                 child: Text(
                   'Purchase effortlessly',
-                  style: FlutterFlowTheme.of(context).title3.override(
+                  style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Lexend Deca',
                         color: Colors.white,
                         fontSize: 20.0,

@@ -49,7 +49,7 @@ class _ProductListWidgetState extends State<ProductListWidget>
         automaticallyImplyLeading: false,
         title: Text(
           'Products Listing',
-          style: FlutterFlowTheme.of(context).subtitle1,
+          style: FlutterFlowTheme.of(context).titleMedium,
         ),
         actions: [],
         centerTitle: false,
@@ -74,7 +74,7 @@ class _ProductListWidgetState extends State<ProductListWidget>
                             width: 50.0,
                             height: 50.0,
                             child: CircularProgressIndicator(
-                              color: FlutterFlowTheme.of(context).primaryColor,
+                              color: FlutterFlowTheme.of(context).primary,
                             ),
                           ),
                         );
@@ -136,7 +136,7 @@ class _ProductListWidgetState extends State<ProductListWidget>
                                           Text(
                                             listViewProductRecord.name!,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle1
+                                                .titleMedium
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 16.0,
@@ -156,12 +156,12 @@ class _ProductListWidgetState extends State<ProductListWidget>
                                               textAlign: TextAlign.end,
                                               style: FlutterFlowTheme.of(
                                                       context)
-                                                  .subtitle1
+                                                  .titleMedium
                                                   .override(
                                                     fontFamily: 'Poppins',
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryColor,
+                                                        .primary,
                                                     fontSize: 12.0,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -170,12 +170,12 @@ class _ProductListWidgetState extends State<ProductListWidget>
                                           Text(
                                             listViewProductRecord.uom!,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle1
+                                                .titleMedium
                                                 .override(
                                                   fontFamily: 'Poppins',
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryColor,
+                                                      .primary,
                                                   fontSize: 12.0,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -203,7 +203,7 @@ class _ProductListWidgetState extends State<ProductListWidget>
                                                 maxLines: 5,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2
+                                                        .bodySmall
                                                         .override(
                                                           fontFamily: 'Poppins',
                                                           fontSize: 10.0,

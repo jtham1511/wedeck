@@ -32,3 +32,6 @@ export '/s3_w6_brasilian_ebony/s3_w6_brasilian_ebony_widget.dart'
     show S3W6BrasilianEbonyWidget;
 export '/solid_oak_skirting/solid_oak_skirting_widget.dart'
     show SolidOakSkirtingWidget;
+export '/sms_code/sms_code_widget.dart' show SmsCodeWidget;
+export '/phone_signin/phone_signin_widget.dart' show PhoneSigninWidget;
+export '/close_account/close_account_widget.dart' show CloseAccountWidget;
