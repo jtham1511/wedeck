@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/close_accemail_sent_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -80,31 +81,35 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget>
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (Theme.of(context).brightness == Brightness.dark)
-                            Image.asset(
-                              'assets/images/WeDeck-beta.png',
-                              width: 240.0,
-                              height: 60.0,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          if (!(Theme.of(context).brightness ==
-                              Brightness.dark))
-                            Image.asset(
-                              'assets/images/WeDeck-beta.png',
-                              width: 110.0,
-                              height: 100.0,
-                              fit: BoxFit.fitWidth,
-                            ).animateOnPageLoad(
-                                animationsMap['imageOnPageLoadAnimation']!),
-                        ],
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 80.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (Theme.of(context).brightness == Brightness.dark)
+                              Image.asset(
+                                'assets/images/WeDeck-beta.png',
+                                width: 240.0,
+                                height: 60.0,
+                                fit: BoxFit.fitWidth,
+                              ),
+                            if (!(Theme.of(context).brightness ==
+                                Brightness.dark))
+                              Image.asset(
+                                'assets/images/WeDeck-beta.png',
+                                width: 110.0,
+                                height: 100.0,
+                                fit: BoxFit.fitWidth,
+                              ).animateOnPageLoad(
+                                  animationsMap['imageOnPageLoadAnimation']!),
+                          ],
+                        ),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.min,
@@ -169,179 +174,138 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget>
                           ),
                         ],
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 70.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4.0,
-                              color: Color(0x3600000F),
-                              offset: Offset(0.0, -1.0),
-                            )
-                          ],
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(0.0),
-                            bottomRight: Radius.circular(0.0),
-                            topLeft: Radius.circular(16.0),
-                            topRight: Radius.circular(16.0),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 70.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4.0,
+                                color: Color(0x3600000F),
+                                offset: Offset(0.0, -1.0),
+                              )
+                            ],
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(0.0),
+                              bottomRight: Radius.circular(0.0),
+                              topLeft: Radius.circular(16.0),
+                              topRight: Radius.circular(16.0),
+                            ),
                           ),
-                        ),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20.0, 12.0, 20.0, 32.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Expanded(
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          _model.pgDeletedUserRef =
-                                              currentUserReference;
-                                          await Future.delayed(const Duration(
-                                              milliseconds: 500));
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () => FocusScope.of(
-                                                        context)
-                                                    .requestFocus(_unfocusNode),
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.of(context)
-                                                          .viewInsets,
-                                                  child:
-                                                      CloseAccemailSentWidget(),
-                                                ),
-                                              );
-                                            },
-                                          ).then((value) => setState(() {}));
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 12.0, 20.0, 32.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Expanded(
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            _model.pgDeletedUserRef =
+                                                currentUserReference;
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 500));
 
-                                          ScaffoldMessenger.of(context)
-                                              .clearSnackBars();
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'After Logout and Before Delete User  ${_model.pgDeletedUserRef?.id}',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
+                                            final usersUpdateData = {
+                                              ...createUsersRecordData(
+                                                isDeleted: true,
                                               ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
+                                              'date_delete':
+                                                  FieldValue.serverTimestamp(),
+                                            };
+                                            await currentUserReference!
+                                                .update(usersUpdateData);
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 1000));
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
                                               backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
-                                          await authManager.deleteUser(context);
-                                          await Future.delayed(const Duration(
-                                              milliseconds: 3000));
-                                          await _model.pgDeletedUserRef!
-                                              .delete();
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Delete User Account',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
-                                          await Future.delayed(const Duration(
-                                              milliseconds: 1000));
-                                          await authManager.signOut();
-                                          ScaffoldMessenger.of(context)
-                                              .clearSnackBars();
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Auth Logout',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
-                                          await Navigator.push(
-                                            context,
-                                            PageTransition(
-                                              type: PageTransitionType.fade,
-                                              duration:
-                                                  Duration(milliseconds: 1000),
-                                              reverseDuration:
-                                                  Duration(milliseconds: 1000),
-                                              child: Login01Widget(),
-                                            ),
-                                          );
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '0yblpecn' /* Close Account */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 130.0,
-                                          height: 50.0,
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: Colors.white,
-                                                    fontSize: 18.0,
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () =>
+                                                      FocusScope.of(context)
+                                                          .requestFocus(
+                                                              _unfocusNode),
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child:
+                                                        CloseAccemailSentWidget(),
                                                   ),
-                                          elevation: 2.0,
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
+                                                );
+                                              },
+                                            ).then((value) => setState(() {}));
+
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 3000));
+                                            await authManager
+                                                .deleteUser(context);
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 1000));
+                                            await authManager.signOut();
+                                            await Navigator.push(
+                                              context,
+                                              PageTransition(
+                                                type: PageTransitionType.fade,
+                                                duration: Duration(
+                                                    milliseconds: 1000),
+                                                reverseDuration: Duration(
+                                                    milliseconds: 1000),
+                                                child: Login01Widget(),
+                                              ),
+                                            );
+                                          },
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            '0yblpecn' /* Close Account */,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: 130.0,
+                                            height: 50.0,
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily: 'Poppins',
+                                                      color: Colors.white,
+                                                      fontSize: 18.0,
+                                                    ),
+                                            elevation: 2.0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),

@@ -238,11 +238,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // splash
   {
     '68oxswp4': {
-      'en': 'Welcome to WeDeck',
+      'en':
+          'Your account has been suspended or terminated. Please contact support@yws.com.sg if you have not requested for account closing. ',
       'zh_Hans': '欢迎来到WeDeck',
     },
     'dy4bjjq8': {
-      'en': 'You\'re  in Good Hands',
+      'en':
+          'Kindly please click on Create Account to create a new user account in order to enjoy our exclusive deals and promotions. ',
       'zh_Hans': '轻松购买',
     },
   },
@@ -774,7 +776,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Total',
       'zh_Hans': '',
     },
-    '70vd1lle': {
+    'rb5zkxwd': {
       'en': 'Proceed to Checkout',
       'zh_Hans': '',
     },

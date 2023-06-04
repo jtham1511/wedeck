@@ -150,7 +150,8 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               children: [
                                 AuthUserStreamWidget(
                                   builder: (context) => Text(
-                                    currentUserDisplayName,
+                                    currentUserDisplayName.maybeHandleOverflow(
+                                        maxChars: 17),
                                     style: FlutterFlowTheme.of(context)
                                         .headlineSmall,
                                   ),
@@ -159,7 +160,8 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 4.0, 0.0, 0.0),
                                   child: Text(
-                                    currentUserEmail,
+                                    currentUserEmail.maybeHandleOverflow(
+                                        maxChars: 30),
                                     style:
                                         FlutterFlowTheme.of(context).bodySmall,
                                   ),

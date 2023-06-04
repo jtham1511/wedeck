@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/forgot/forgot_widget.dart';
 import '/main.dart';
 import '/phone_signin/phone_signin_widget.dart';
+import '/splash/splash_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -389,6 +390,24 @@ class _Login01WidgetState extends State<Login01Widget>
                                               return;
                                             }
 
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'memberId check : ${valueOrDefault(currentUserDocument?.memberId, '')}',
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
                                             if (valueOrDefault(
                                                         currentUserDocument
                                                             ?.memberId,
@@ -408,9 +427,43 @@ class _Login01WidgetState extends State<Login01Widget>
                                                       milliseconds: 300),
                                                   reverseDuration: Duration(
                                                       milliseconds: 300),
-                                                  child: Login01Widget(),
+                                                  child: SplashWidget(),
                                                 ),
                                               );
+                                              await currentUserReference!
+                                                  .delete();
+                                              await authManager.signOut();
+                                              await authManager
+                                                  .deleteUser(context);
+                                              await Future.delayed(
+                                                  const Duration(
+                                                      milliseconds: 1000));
+                                            } else if (valueOrDefault<bool>(
+                                                currentUserDocument?.isDeleted,
+                                                false)) {
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SplashWidget(),
+                                                ),
+                                              );
+                                              await authManager.signOut();
+                                              await Future.delayed(
+                                                  const Duration(
+                                                      milliseconds: 3000));
+                                            } else if (!currentUserEmailVerified) {
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SplashWidget(),
+                                                ),
+                                              );
+                                              await authManager.signOut();
+                                              await Future.delayed(
+                                                  const Duration(
+                                                      milliseconds: 500));
                                             } else {
                                               await Navigator.push(
                                                 context,

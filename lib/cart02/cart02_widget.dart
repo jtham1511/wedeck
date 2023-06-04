@@ -5,6 +5,7 @@ import '/components/cart_entry_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -369,18 +370,6 @@ class _Cart02WidgetState extends State<Cart02Widget> {
                   onTap: () async {
                     _model.orderIdGenerated = await actions.orderGenerator();
                     await Future.delayed(const Duration(milliseconds: 500));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Oder ID : ${_model.orderIdGenerated}',
-                          style: TextStyle(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                          ),
-                        ),
-                        duration: Duration(milliseconds: 4000),
-                        backgroundColor: FlutterFlowTheme.of(context).secondary,
-                      ),
-                    );
                     setState(() {
                       FFAppState().baseTotal = functions.cartTotal(
                           cart02CartRecordList.map((e) => e.price).toList(),
@@ -399,19 +388,6 @@ class _Cart02WidgetState extends State<Cart02Widget> {
                               .toList())!;
                     });
                     await Future.delayed(const Duration(milliseconds: 650));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          '${FFAppState().gstTotal.toString()}  ${FFAppState().baseTotal.toString()}  ${FFAppState().gstAndTotal.toString()}',
-                          style: TextStyle(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                          ),
-                        ),
-                        duration: Duration(milliseconds: 4000),
-                        backgroundColor: FlutterFlowTheme.of(context).secondary,
-                      ),
-                    );
-                    await Future.delayed(const Duration(milliseconds: 3000));
 
                     final paymentTxnCreateData = {
                       ...createPaymentTxnRecordData(
@@ -433,18 +409,6 @@ class _Cart02WidgetState extends State<Cart02Widget> {
                     await PaymentTxnRecord.collection
                         .doc()
                         .set(paymentTxnCreateData);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Create Payment transaction',
-                          style: TextStyle(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                          ),
-                        ),
-                        duration: Duration(milliseconds: 4000),
-                        backgroundColor: FlutterFlowTheme.of(context).secondary,
-                      ),
-                    );
                     await Future.delayed(const Duration(milliseconds: 1000));
                     await Navigator.push(
                       context,
@@ -480,15 +444,102 @@ class _Cart02WidgetState extends State<Cart02Widget> {
                       ),
                     ),
                     alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        '70vd1lle' /* Proceed to Checkout */,
-                      ),
-                      style: FlutterFlowTheme.of(context).titleMedium.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.of(context).primaryBtnText,
-                            fontSize: 20.0,
+                    child: Stack(
+                      children: [
+                        FFButtonWidget(
+                          onPressed: () async {
+                            _model.generatedOrderID =
+                                await actions.orderGenerator();
+                            await Future.delayed(
+                                const Duration(milliseconds: 500));
+                            setState(() {
+                              FFAppState().baseTotal = functions.cartTotal(
+                                  cart02CartRecordList
+                                      .map((e) => e.price)
+                                      .toList(),
+                                  cart02CartRecordList
+                                      .map((e) => e.quantity)
+                                      .toList())!;
+                              FFAppState().gstTotal = functions.calculateGST(
+                                  cart02CartRecordList
+                                      .map((e) => e.price)
+                                      .toList(),
+                                  cart02CartRecordList
+                                      .map((e) => e.quantity)
+                                      .toList())!;
+                              FFAppState().gstAndTotal = functions.totalAndGST(
+                                  cart02CartRecordList
+                                      .map((e) => e.price)
+                                      .toList(),
+                                  cart02CartRecordList
+                                      .map((e) => e.quantity)
+                                      .toList())!;
+                            });
+                            await Future.delayed(
+                                const Duration(milliseconds: 650));
+
+                            final paymentTxnCreateData = {
+                              ...createPaymentTxnRecordData(
+                                cartTotal: FFAppState().baseTotal,
+                                gstTotal: FFAppState().gstTotal,
+                                isPaid: false,
+                                isCancel: false,
+                                orderId: _model.generatedOrderID,
+                                totalPaid: FFAppState().gstAndTotal,
+                                memberId: valueOrDefault(
+                                    currentUserDocument?.memberId, ''),
+                                email: currentUserEmail,
+                                hp: currentPhoneNumber,
+                                userId: currentUserReference,
+                              ),
+                              'create_on': FieldValue.serverTimestamp(),
+                              'updated_on': FieldValue.serverTimestamp(),
+                            };
+                            await PaymentTxnRecord.collection
+                                .doc()
+                                .set(paymentTxnCreateData);
+                            await Future.delayed(
+                                const Duration(milliseconds: 1000));
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CheckOutPageWidget(
+                                  orderId: _model.generatedOrderID,
+                                  cartId: cart02CartRecordList
+                                      .map((e) => e.reference)
+                                      .toList(),
+                                ),
+                              ),
+                            );
+
+                            setState(() {});
+                          },
+                          text: FFLocalizations.of(context).getText(
+                            'rb5zkxwd' /* Proceed to Checkout */,
                           ),
+                          options: FFButtonOptions(
+                            height: 60.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                90.0, 0.0, 90.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                ),
+                            elevation: 0.0,
+                            borderSide: BorderSide(
+                              color: Color(0xFF4B39EF),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

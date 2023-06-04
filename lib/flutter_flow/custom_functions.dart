@@ -60,15 +60,15 @@ double? totalAndGST(
   return totalWithGST;
 }
 
-int convertSliderStrToInt(String? sliderStr) {
+int convertSliderToInt(double? sliderValue) {
   int tries;
 
-  if (sliderStr == null) {
+  if (sliderValue == null) {
     return 0;
   }
 
   try {
-    tries = int.parse(sliderStr);
+    tries = sliderValue.toInt();
   } catch (err) {
     return 0;
   }

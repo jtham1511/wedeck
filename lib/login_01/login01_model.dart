@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/forgot/forgot_widget.dart';
 import '/main.dart';
 import '/phone_signin/phone_signin_widget.dart';
+import '/splash/splash_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';

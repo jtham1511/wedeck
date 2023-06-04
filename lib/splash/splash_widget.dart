@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -31,9 +30,9 @@ class _SplashWidgetState extends State<SplashWidget>
         RotateEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
-          duration: 1680.ms,
+          duration: 1190.ms,
           begin: 0.0,
-          end: 3.0,
+          end: 2.0,
         ),
       ],
     ),
@@ -83,12 +82,7 @@ class _SplashWidgetState extends State<SplashWidget>
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onTap: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NavBarPage(initialPage: 'homeFinal'),
-              ),
-            );
+            Navigator.pop(context);
           },
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -101,29 +95,31 @@ class _SplashWidgetState extends State<SplashWidget>
                 fit: BoxFit.fitHeight,
               ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(30.0, 40.0, 30.0, 0.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
-                    '68oxswp4' /* Welcome to WeDeck */,
+                    '68oxswp4' /* Your account has been suspende... */,
                   ),
+                  textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).displaySmall.override(
-                        fontFamily: 'Lexend Deca',
+                        fontFamily: 'Poppins',
                         color: Colors.white,
-                        fontSize: 28.0,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.normal,
                       ),
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 120.0),
+                padding: EdgeInsetsDirectional.fromSTEB(30.0, 30.0, 30.0, 0.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
-                    'dy4bjjq8' /* You're  in Good Hands */,
+                    'dy4bjjq8' /* Kindly please click on Create ... */,
                   ),
+                  textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
-                        fontFamily: 'Lexend Deca',
+                        fontFamily: 'Poppins',
                         color: Colors.white,
-                        fontSize: 20.0,
+                        fontSize: 15.0,
                         fontWeight: FontWeight.normal,
                       ),
                 ),

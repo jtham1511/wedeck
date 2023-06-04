@@ -119,7 +119,7 @@ class _HomeFinalWidgetState extends State<HomeFinalWidget> {
                                 child: AuthUserStreamWidget(
                                   builder: (context) => Text(
                                     'HELLO  ${currentUserDisplayName}'
-                                        .maybeHandleOverflow(maxChars: 12),
+                                        .maybeHandleOverflow(maxChars: 20),
                                     textAlign: TextAlign.start,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium

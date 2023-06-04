@@ -238,7 +238,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 15.0, 0.0, 0.0),
-                                          child: Slider(
+                                          child: Slider.adaptive(
                                             activeColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primary,
@@ -246,9 +246,11 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                 FlutterFlowTheme.of(context)
                                                     .accent2,
                                             min: 0.0,
-                                            max: 1000.0,
+                                            max: 2000.0,
                                             value: _model.sliderValue ??= 0.0,
-                                            divisions: 1000,
+                                            label:
+                                                _model.sliderValue.toString(),
+                                            divisions: 2000,
                                             onChanged: (newValue) {
                                               newValue = double.parse(
                                                   newValue.toStringAsFixed(0));
@@ -313,7 +315,12 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'Add To Cart',
+                                'Add To Cart Qty ${formatNumber(
+                                  _model.sliderValue,
+                                  formatType: FormatType.custom,
+                                  format: '#,##0',
+                                  locale: '',
+                                )}',
                                 style: GoogleFonts.getFont(
                                   'Roboto',
                                   color: FlutterFlowTheme.of(context)
@@ -344,8 +351,8 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                               producImage:
                                   productDetailsProductRecord.productImage,
                               uom: productDetailsProductRecord.uom,
-                              quantity: functions.convertSliderStrToInt(
-                                  _model.sliderValue?.toString()),
+                              quantity: functions
+                                  .convertSliderToInt(_model.sliderValue),
                             ),
                             'created_at': FieldValue.serverTimestamp(),
                           };
