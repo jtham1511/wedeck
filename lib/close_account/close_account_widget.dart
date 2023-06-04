@@ -1,12 +1,17 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/components/close_accemail_sent_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/login_01/login01_widget.dart';
+import '/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'close_account_model.dart';
 export 'close_account_model.dart';
 
@@ -17,11 +22,28 @@ class CloseAccountWidget extends StatefulWidget {
   _CloseAccountWidgetState createState() => _CloseAccountWidgetState();
 }
 
-class _CloseAccountWidgetState extends State<CloseAccountWidget> {
+class _CloseAccountWidgetState extends State<CloseAccountWidget>
+    with TickerProviderStateMixin {
   late CloseAccountModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+
+  final animationsMap = {
+    'imageOnPageLoadAnimation': AnimationInfo(
+      reverse: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        RotateEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1680.ms,
+          begin: 0.0,
+          end: 3.0,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
@@ -39,12 +61,14 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Container(
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: Container(
           width: double.infinity,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).primaryBackground,
@@ -78,7 +102,8 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget> {
                               width: 110.0,
                               height: 100.0,
                               fit: BoxFit.fitWidth,
-                            ),
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation']!),
                         ],
                       ),
                       Column(
@@ -87,7 +112,7 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget> {
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 10.0),
+                                0.0, 0.0, 0.0, 2.0),
                             child: Image.asset(
                               'assets/images/illi_2@2x.png',
                               width: 300.0,
@@ -102,9 +127,11 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget> {
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 0.0, 20.0, 10.0),
+                                      20.0, 0.0, 20.0, 5.0),
                                   child: Text(
-                                    'Are you sure you want to close your Account ?',
+                                    FFLocalizations.of(context).getText(
+                                      '5nbjgfy5' /* Are you sure you want to close... */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -123,9 +150,11 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget> {
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 0.0, 20.0, 20.0),
+                                      20.0, 0.0, 20.0, 10.0),
                                   child: Text(
-                                    'By closing your Account, you will no longer have acess to your Reward Points and any redeemed Rewards. You will also not be able to earn any further points and ennjoy exclusive deals at our preferred Partners Brands. \n\nIf you wish to premanently delete your Account and remove all your presonal information, please contact our Customer Service at support@yws.com.sg',
+                                    FFLocalizations.of(context).getText(
+                                      'c2tcgygm' /* By closing your Account, you w... */,
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -160,76 +189,160 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget> {
                             topRight: Radius.circular(16.0),
                           ),
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 12.0, 20.0, 32.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Expanded(
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        await launchUrl(Uri(
-                                            scheme: 'mailto',
-                                            path: 'support@yws.com.sg',
-                                            query: {
-                                              'subject':
-                                                  'User Request of Clossing Account',
-                                              'body':
-                                                  'Email ID ${currentUserEmail}User ID${currentUserUid}Name${currentUserDisplayName}Requested date / time : ${getCurrentTimestamp.toString()}',
-                                            }
-                                                .entries
-                                                .map((MapEntry<String, String>
-                                                        e) =>
-                                                    '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-                                                .join('&')));
-                                        await deleteUser(context);
-                                        await signOut();
-                                        await currentUserReference!.delete();
-                                        await Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                Login01Widget(),
-                                          ),
-                                          (r) => false,
-                                        );
-                                      },
-                                      text: 'Close Account',
-                                      options: FFButtonOptions(
-                                        width: 130.0,
-                                        height: 50.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white,
-                                              fontSize: 18.0,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20.0, 12.0, 20.0, 32.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Expanded(
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          _model.pgDeletedUserRef =
+                                              currentUserReference;
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 500));
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            enableDrag: false,
+                                            context: context,
+                                            builder: (context) {
+                                              return GestureDetector(
+                                                onTap: () => FocusScope.of(
+                                                        context)
+                                                    .requestFocus(_unfocusNode),
+                                                child: Padding(
+                                                  padding:
+                                                      MediaQuery.of(context)
+                                                          .viewInsets,
+                                                  child:
+                                                      CloseAccemailSentWidget(),
+                                                ),
+                                              );
+                                            },
+                                          ).then((value) => setState(() {}));
+
+                                          ScaffoldMessenger.of(context)
+                                              .clearSnackBars();
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'After Logout and Before Delete User  ${_model.pgDeletedUserRef?.id}',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
                                             ),
-                                        elevation: 2.0,
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
+                                          );
+                                          await authManager.deleteUser(context);
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 3000));
+                                          await _model.pgDeletedUserRef!
+                                              .delete();
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Delete User Account',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 1000));
+                                          await authManager.signOut();
+                                          ScaffoldMessenger.of(context)
+                                              .clearSnackBars();
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Auth Logout',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                          await Navigator.push(
+                                            context,
+                                            PageTransition(
+                                              type: PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 1000),
+                                              reverseDuration:
+                                                  Duration(milliseconds: 1000),
+                                              child: Login01Widget(),
+                                            ),
+                                          );
+                                        },
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '0yblpecn' /* Close Account */,
+                                        ),
+                                        options: FFButtonOptions(
+                                          width: 130.0,
+                                          height: 50.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: Colors.white,
+                                                    fontSize: 18.0,
+                                                  ),
+                                          elevation: 2.0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -243,8 +356,21 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
                     child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onTap: () async {
-                        Navigator.pop(context);
+                        await Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.scale,
+                            alignment: Alignment.bottomCenter,
+                            duration: Duration(milliseconds: 200),
+                            reverseDuration: Duration(milliseconds: 200),
+                            child: NavBarPage(initialPage: 'personal_details'),
+                          ),
+                        );
                       },
                       child: Icon(
                         Icons.arrow_back,
@@ -258,7 +384,9 @@ class _CloseAccountWidgetState extends State<CloseAccountWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 0.0, 0.0),
                       child: Text(
-                        'Close Account',
+                        FFLocalizations.of(context).getText(
+                          'ja1ww1k0' /* Close Account */,
+                        ),
                         style: FlutterFlowTheme.of(context)
                             .headlineMedium
                             .override(

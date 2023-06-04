@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -38,12 +38,15 @@ class _MyQrWidgetState extends State<MyQrWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
+          top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -80,7 +83,9 @@ class _MyQrWidgetState extends State<MyQrWidget> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'WeDeck ID : ',
+                              FFLocalizations.of(context).getText(
+                                'swb6fixs' /* WeDeck ID :  */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -109,6 +114,10 @@ class _MyQrWidgetState extends State<MyQrWidget> {
                                   0.0, 50.0, 0.0, 0.0),
                               child: AuthUserStreamWidget(
                                 builder: (context) => InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
                                   onTap: () async {
                                     await Navigator.push(
                                       context,
@@ -159,7 +168,9 @@ class _MyQrWidgetState extends State<MyQrWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 80.0, 20.0, 0.0),
                                 child: Text(
-                                  'Please scan your WeDeck ID at our participating outlet to earn you loyalty reward point and enjoy exclusive disount',
+                                  FFLocalizations.of(context).getText(
+                                    '1cytn1xq' /* Please scan your WeDeck ID at ... */,
+                                  ),
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
                                       .bodySmall

@@ -1,80 +1,124 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'product_record.g.dart';
+class ProductRecord extends FirestoreRecord {
+  ProductRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class ProductRecord
-    implements Built<ProductRecord, ProductRecordBuilder> {
-  static Serializer<ProductRecord> get serializer => _$productRecordSerializer;
+  // "name" field.
+  String? _name;
+  String get name => _name ?? '';
+  bool hasName() => _name != null;
 
-  String? get name;
+  // "description" field.
+  String? _description;
+  String get description => _description ?? '';
+  bool hasDescription() => _description != null;
 
-  String? get description;
+  // "specifications" field.
+  String? _specifications;
+  String get specifications => _specifications ?? '';
+  bool hasSpecifications() => _specifications != null;
 
-  String? get specifications;
+  // "created_at" field.
+  DateTime? _createdAt;
+  DateTime? get createdAt => _createdAt;
+  bool hasCreatedAt() => _createdAt != null;
 
-  @BuiltValueField(wireName: 'created_at')
-  DateTime? get createdAt;
+  // "modified_at" field.
+  DateTime? _modifiedAt;
+  DateTime? get modifiedAt => _modifiedAt;
+  bool hasModifiedAt() => _modifiedAt != null;
 
-  @BuiltValueField(wireName: 'modified_at')
-  DateTime? get modifiedAt;
+  // "on_sale" field.
+  bool? _onSale;
+  bool get onSale => _onSale ?? false;
+  bool hasOnSale() => _onSale != null;
 
-  @BuiltValueField(wireName: 'on_sale')
-  bool? get onSale;
+  // "sale_price" field.
+  double? _salePrice;
+  double get salePrice => _salePrice ?? 0.0;
+  bool hasSalePrice() => _salePrice != null;
 
-  @BuiltValueField(wireName: 'sale_price')
-  double? get salePrice;
+  // "quantity" field.
+  int? _quantity;
+  int get quantity => _quantity ?? 0;
+  bool hasQuantity() => _quantity != null;
 
-  int? get quantity;
+  // "cost" field.
+  double? _cost;
+  double get cost => _cost ?? 0.0;
+  bool hasCost() => _cost != null;
 
-  double? get cost;
+  // "retail_price" field.
+  double? _retailPrice;
+  double get retailPrice => _retailPrice ?? 0.0;
+  bool hasRetailPrice() => _retailPrice != null;
 
-  @BuiltValueField(wireName: 'retail_price')
-  double? get retailPrice;
+  // "product_image" field.
+  String? _productImage;
+  String get productImage => _productImage ?? '';
+  bool hasProductImage() => _productImage != null;
 
-  @BuiltValueField(wireName: 'product_image')
-  String? get productImage;
+  // "uom" field.
+  String? _uom;
+  String get uom => _uom ?? '';
+  bool hasUom() => _uom != null;
 
-  String? get uom;
+  // "category" field.
+  String? _category;
+  String get category => _category ?? '';
+  bool hasCategory() => _category != null;
 
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(ProductRecordBuilder builder) => builder
-    ..name = ''
-    ..description = ''
-    ..specifications = ''
-    ..onSale = false
-    ..salePrice = 0.0
-    ..quantity = 0
-    ..cost = 0.0
-    ..retailPrice = 0.0
-    ..productImage = ''
-    ..uom = '';
+  void _initializeFields() {
+    _name = snapshotData['name'] as String?;
+    _description = snapshotData['description'] as String?;
+    _specifications = snapshotData['specifications'] as String?;
+    _createdAt = snapshotData['created_at'] as DateTime?;
+    _modifiedAt = snapshotData['modified_at'] as DateTime?;
+    _onSale = snapshotData['on_sale'] as bool?;
+    _salePrice = castToType<double>(snapshotData['sale_price']);
+    _quantity = snapshotData['quantity'] as int?;
+    _cost = castToType<double>(snapshotData['cost']);
+    _retailPrice = castToType<double>(snapshotData['retail_price']);
+    _productImage = snapshotData['product_image'] as String?;
+    _uom = snapshotData['uom'] as String?;
+    _category = snapshotData['category'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('product');
 
-  static Stream<ProductRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<ProductRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => ProductRecord.fromSnapshot(s));
 
-  static Future<ProductRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<ProductRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => ProductRecord.fromSnapshot(s));
 
-  ProductRecord._();
-  factory ProductRecord([void Function(ProductRecordBuilder) updates]) =
-      _$ProductRecord;
+  static ProductRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      ProductRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static ProductRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      ProductRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'ProductRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createProductRecordData({
@@ -90,24 +134,24 @@ Map<String, dynamic> createProductRecordData({
   double? retailPrice,
   String? productImage,
   String? uom,
+  String? category,
 }) {
-  final firestoreData = serializers.toFirestore(
-    ProductRecord.serializer,
-    ProductRecord(
-      (p) => p
-        ..name = name
-        ..description = description
-        ..specifications = specifications
-        ..createdAt = createdAt
-        ..modifiedAt = modifiedAt
-        ..onSale = onSale
-        ..salePrice = salePrice
-        ..quantity = quantity
-        ..cost = cost
-        ..retailPrice = retailPrice
-        ..productImage = productImage
-        ..uom = uom,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'name': name,
+      'description': description,
+      'specifications': specifications,
+      'created_at': createdAt,
+      'modified_at': modifiedAt,
+      'on_sale': onSale,
+      'sale_price': salePrice,
+      'quantity': quantity,
+      'cost': cost,
+      'retail_price': retailPrice,
+      'product_image': productImage,
+      'uom': uom,
+      'category': category,
+    }.withoutNulls,
   );
 
   return firestoreData;

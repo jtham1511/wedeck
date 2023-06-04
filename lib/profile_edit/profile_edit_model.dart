@@ -1,14 +1,15 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class ProfileEditModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? emailaddressControllerValidator;
   // State field(s) for contact_number widget.
   TextEditingController? contactNumberController;
+  final contactNumberMask = MaskTextInputFormatter(mask: '+##################');
   String? Function(BuildContext, String?)? contactNumberControllerValidator;
   // State field(s) for company widget.
   TextEditingController? companyController;

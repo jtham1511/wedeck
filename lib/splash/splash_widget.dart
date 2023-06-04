@@ -23,10 +23,33 @@ class _SplashWidgetState extends State<SplashWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final animationsMap = {
+    'imageOnPageLoadAnimation': AnimationInfo(
+      reverse: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        RotateEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1680.ms,
+          begin: 0.0,
+          end: 3.0,
+        ),
+      ],
+    ),
+  };
+
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => SplashModel());
+
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
   }
 
   @override
@@ -38,6 +61,8 @@ class _SplashWidgetState extends State<SplashWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF1E2429),
@@ -53,11 +78,15 @@ class _SplashWidgetState extends State<SplashWidget>
           ),
         ),
         child: InkWell(
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
           onTap: () async {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => NavBarPage(initialPage: 'home'),
+                builder: (context) => NavBarPage(initialPage: 'homeFinal'),
               ),
             );
           },
@@ -66,15 +95,17 @@ class _SplashWidgetState extends State<SplashWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/WeDeck-logo.png',
-                width: 180.0,
-                height: 140.0,
+                'assets/images/WeDeck-beta.png',
+                width: 120.0,
+                height: 110.0,
                 fit: BoxFit.fitHeight,
-              ),
+              ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: Text(
-                  'Welcome to WeDeck',
+                  FFLocalizations.of(context).getText(
+                    '68oxswp4' /* Welcome to WeDeck */,
+                  ),
                   style: FlutterFlowTheme.of(context).displaySmall.override(
                         fontFamily: 'Lexend Deca',
                         color: Colors.white,
@@ -86,7 +117,9 @@ class _SplashWidgetState extends State<SplashWidget>
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 120.0),
                 child: Text(
-                  'Purchase effortlessly',
+                  FFLocalizations.of(context).getText(
+                    'dy4bjjq8' /* You're  in Good Hands */,
+                  ),
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Lexend Deca',
                         color: Colors.white,

@@ -1,9 +1,10 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/close_account/close_account_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/login_01/login01_widget.dart';
+import '/main.dart';
 import '/privacy/privacy_widget.dart';
 import '/profile_edit/profile_edit_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -43,40 +44,53 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30.0,
-          borderWidth: 1.0,
-          buttonSize: 60.0,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 30.0,
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: FlutterFlowTheme.of(context).primaryText,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.leftToRight,
+                  duration: Duration(milliseconds: 200),
+                  reverseDuration: Duration(milliseconds: 200),
+                  child: NavBarPage(initialPage: 'homeFinal'),
+                ),
+              );
+            },
           ),
-          onPressed: () async {
-            Navigator.pop(context);
-          },
+          title: Text(
+            FFLocalizations.of(context).getText(
+              'q8n4isw3' /* Profile */,
+            ),
+            style: FlutterFlowTheme.of(context).titleSmall.override(
+                  fontFamily: 'Poppins',
+                  fontSize: 20.0,
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        title: Text(
-          'Profile',
-          style: FlutterFlowTheme.of(context).titleSmall.override(
-                fontFamily: 'Poppins',
-                fontSize: 20.0,
-              ),
-        ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
+          top: true,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -161,7 +175,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
                   child: Text(
-                    'Account',
+                    FFLocalizations.of(context).getText(
+                      'a5y9n07m' /* Account */,
+                    ),
                     style: FlutterFlowTheme.of(context).titleSmall,
                   ),
                 ),
@@ -198,7 +214,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Payment Options',
+                              FFLocalizations.of(context).getText(
+                                '2dbtooiw' /* Payment Options */,
+                              ),
                               style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
@@ -206,7 +224,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 30.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Coming Soon !!!',
+                              FFLocalizations.of(context).getText(
+                                'klo9z3yr' /* Coming Soon !!! */,
+                              ),
                               textAlign: TextAlign.end,
                               style: FlutterFlowTheme.of(context)
                                   .bodySmall
@@ -266,7 +286,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Country',
+                              FFLocalizations.of(context).getText(
+                                'i3un1w9u' /* Country */,
+                              ),
                               style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
@@ -274,7 +296,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 90.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Coming Soon !!!',
+                              FFLocalizations.of(context).getText(
+                                'n5wogxiw' /* Coming Soon !!! */,
+                              ),
                               textAlign: TextAlign.end,
                               style: FlutterFlowTheme.of(context)
                                   .bodySmall
@@ -334,7 +358,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Notification Settings',
+                              FFLocalizations.of(context).getText(
+                                '0dp7ljiq' /* Notification Settings */,
+                              ),
                               style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
@@ -342,7 +368,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 20.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Coming Soon !!!',
+                              FFLocalizations.of(context).getText(
+                                '560hfv6i' /* Coming Soon !!! */,
+                              ),
                               textAlign: TextAlign.end,
                               style: FlutterFlowTheme.of(context)
                                   .bodySmall
@@ -391,6 +419,10 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await Navigator.push(
                             context,
@@ -411,7 +443,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'Edit Profile',
+                                FFLocalizations.of(context).getText(
+                                  'b6m3aig0' /* Edit Profile */,
+                                ),
                                 style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),
@@ -435,7 +469,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
                   child: Text(
-                    'General',
+                    FFLocalizations.of(context).getText(
+                      '3arzcm5l' /* General */,
+                    ),
                     style: FlutterFlowTheme.of(context).titleSmall,
                   ),
                 ),
@@ -461,6 +497,10 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchUrl(Uri(
                               scheme: 'mailto',
@@ -486,7 +526,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'Support',
+                                FFLocalizations.of(context).getText(
+                                  'x5st7n4x' /* Support */,
+                                ),
                                 style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),
@@ -529,6 +571,10 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await Navigator.push(
                             context,
@@ -549,7 +595,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'Terms of Service & Privacy Policy',
+                                FFLocalizations.of(context).getText(
+                                  'j116grrw' /* Terms of Service & Privacy Pol... */,
+                                ),
                                 style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),
@@ -604,7 +652,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Invite Friends',
+                              FFLocalizations.of(context).getText(
+                                '1uourabj' /* Invite Friends */,
+                              ),
                               style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
@@ -612,7 +662,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 60.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Coming Soon !!!',
+                              FFLocalizations.of(context).getText(
+                                'z8whvepa' /* Coming Soon !!! */,
+                              ),
                               textAlign: TextAlign.end,
                               style: FlutterFlowTheme.of(context)
                                   .bodySmall
@@ -661,6 +713,10 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await Navigator.push(
                             context,
@@ -682,7 +738,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'Close Account',
+                                FFLocalizations.of(context).getText(
+                                  'woqsmv7i' /* Close Account */,
+                                ),
                                 style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),
@@ -725,8 +783,12 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
-                          await signOut();
+                          await authManager.signOut();
                           await Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -748,7 +810,9 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'Logout',
+                                FFLocalizations.of(context).getText(
+                                  '03yi335z' /* Logout */,
+                                ),
                                 style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),

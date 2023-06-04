@@ -1,7 +1,10 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/product_details/product_details_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -37,18 +40,44 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
-        title: Text(
-          'Product List',
-          style: FlutterFlowTheme.of(context).displaySmall.override(
-                fontFamily: 'Poppins',
-                fontSize: 22.0,
+        title: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+                size: 24.0,
               ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
+              child: Text(
+                FFLocalizations.of(context).getText(
+                  'cui496g1' /* Product List */,
+                ),
+                style: FlutterFlowTheme.of(context).displaySmall.override(
+                      fontFamily: 'Poppins',
+                      fontSize: 22.0,
+                    ),
+              ),
+            ),
+          ],
         ),
         actions: [],
         centerTitle: false,
@@ -83,7 +112,9 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                       controller: _model.searchFieldController,
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Type to search here...',
+                        hintText: FFLocalizations.of(context).getText(
+                          'gg9pgou7' /* Type to search here... */,
+                        ),
                         hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -165,7 +196,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                           image: DecorationImage(
                             fit: BoxFit.fitWidth,
                             image: Image.network(
-                              listViewProductRecord.productImage!,
+                              listViewProductRecord.productImage,
                             ).image,
                           ),
                           boxShadow: [
@@ -198,7 +229,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          listViewProductRecord.name!,
+                                          listViewProductRecord.name,
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
                                               .override(
@@ -209,10 +240,29 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                                               ),
                                         ),
                                       ),
-                                      Icon(
-                                        Icons.chevron_right_rounded,
-                                        color: Colors.white,
-                                        size: 24.0,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProductDetailsWidget(
+                                                productDetails:
+                                                    listViewProductRecord
+                                                        .reference,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Icon(
+                                          Icons.chevron_right_rounded,
+                                          color: Colors.white,
+                                          size: 24.0,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -229,7 +279,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 5.0, 0.0),
                                           child: Text(
-                                            listViewProductRecord.description!,
+                                            listViewProductRecord.description,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodySmall
                                                 .override(
@@ -254,10 +304,43 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button-Reserve pressed ...');
+                                          onPressed: () async {
+                                            final cartCreateData = {
+                                              ...createCartRecordData(
+                                                name:
+                                                    listViewProductRecord.name,
+                                                description:
+                                                    listViewProductRecord
+                                                        .description,
+                                                specifications:
+                                                    listViewProductRecord
+                                                        .specifications,
+                                                price: listViewProductRecord
+                                                    .salePrice,
+                                                onSale: listViewProductRecord
+                                                    .onSale,
+                                                salePrice: listViewProductRecord
+                                                    .retailPrice,
+                                                quantity: 1,
+                                                user: currentUserReference,
+                                                producImage:
+                                                    listViewProductRecord
+                                                        .productImage,
+                                                uom: listViewProductRecord.uom,
+                                              ),
+                                              'created_at':
+                                                  FieldValue.serverTimestamp(),
+                                              'modified_at':
+                                                  FieldValue.serverTimestamp(),
+                                            };
+                                            await CartRecord.collection
+                                                .doc()
+                                                .set(cartCreateData);
                                           },
-                                          text: 'Add QTY',
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            '6fmgkbe2' /* Add to Cart */,
+                                          ),
                                           icon: Icon(
                                             Icons.add_rounded,
                                             color: Colors.white,
@@ -300,7 +383,7 @@ class _ProductListing2WidgetState extends State<ProductListing2Widget> {
                                                 child: Text(
                                                   formatNumber(
                                                     listViewProductRecord
-                                                        .retailPrice!,
+                                                        .retailPrice,
                                                     formatType:
                                                         FormatType.decimal,
                                                     decimalType: DecimalType

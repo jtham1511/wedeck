@@ -1,8 +1,10 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/components/email_sent_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/login_01/login01_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +40,8 @@ class _ForgotWidgetState extends State<ForgotWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFFF1F4F8),
@@ -72,7 +76,15 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                             size: 24.0,
                           ),
                           onPressed: () async {
-                            Navigator.pop(context);
+                            await Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.topToBottom,
+                                duration: Duration(milliseconds: 200),
+                                reverseDuration: Duration(milliseconds: 200),
+                                child: Login01Widget(),
+                              ),
+                            );
                           },
                         ),
                       ),
@@ -80,13 +92,15 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                         child: Text(
-                          'Back',
+                          FFLocalizations.of(context).getText(
+                            'l8kooabq' /* Back */,
+                          ),
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
                               .override(
-                                fontFamily: 'Outfit',
+                                fontFamily: 'Poppins',
                                 color: Color(0xFF0F1113),
-                                fontSize: 16.0,
+                                fontSize: 20.0,
                                 fontWeight: FontWeight.w500,
                               ),
                         ),
@@ -97,9 +111,11 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                   child: Text(
-                    'Forgot Password',
+                    FFLocalizations.of(context).getText(
+                      'zx4m5551' /* Forgot Password */,
+                    ),
                     style: FlutterFlowTheme.of(context).displaySmall.override(
-                          fontFamily: 'Outfit',
+                          fontFamily: 'Poppins',
                           color: Color(0xFF0F1113),
                           fontSize: 32.0,
                           fontWeight: FontWeight.w500,
@@ -129,9 +145,11 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
                       child: Text(
-                        'We will send you an email with a link to reset your password, please enter the email associated with your account below.',
+                        FFLocalizations.of(context).getText(
+                          'boyzoxg9' /* We will send you an email with... */,
+                        ),
                         style: FlutterFlowTheme.of(context).bodySmall.override(
-                              fontFamily: 'Outfit',
+                              fontFamily: 'Poppins',
                               color: Color(0xFF57636C),
                               fontSize: 14.0,
                               fontWeight: FontWeight.normal,
@@ -162,16 +180,20 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                   controller: _model.emailAddressController,
                   obscureText: false,
                   decoration: InputDecoration(
-                    labelText: 'Your email address...',
+                    labelText: FFLocalizations.of(context).getText(
+                      't3rps6xq' /* Your email address... */,
+                    ),
                     labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                          fontFamily: 'Outfit',
+                          fontFamily: 'Poppins',
                           color: Color(0xFF57636C),
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
                         ),
-                    hintText: 'Enter your email...',
+                    hintText: FFLocalizations.of(context).getText(
+                      '89zq42w9' /* Enter your email... */,
+                    ),
                     hintStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Lexend Deca',
+                          fontFamily: 'Poppins',
                           color: Color(0xFF57636C),
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal,
@@ -210,10 +232,10 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                         EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 20.0, 24.0),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Poppins',
                         color: Color(0xFF0F1113),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
                       ),
                   maxLines: null,
                   keyboardType: TextInputType.emailAddress,
@@ -236,12 +258,27 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                     );
                     return;
                   }
-                  await resetPassword(
+                  await authManager.resetPassword(
                     email: _model.emailAddressController.text,
                     context: context,
                   );
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor:
+                        FlutterFlowTheme.of(context).primaryBackground,
+                    enableDrag: false,
+                    context: context,
+                    builder: (context) {
+                      return Padding(
+                        padding: MediaQuery.of(context).viewInsets,
+                        child: EmailSentWidget(),
+                      );
+                    },
+                  ).then((value) => setState(() {}));
                 },
-                text: 'Send Link',
+                text: FFLocalizations.of(context).getText(
+                  'p0wrja5d' /* Send Link */,
+                ),
                 options: FFButtonOptions(
                   width: 270.0,
                   height: 50.0,
@@ -250,7 +287,7 @@ class _ForgotWidgetState extends State<ForgotWidget> {
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: Color(0xFF0F1113),
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Poppins',
                         color: Colors.white,
                         fontSize: 16.0,
                         fontWeight: FontWeight.normal,

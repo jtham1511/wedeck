@@ -1,79 +1,129 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'users_record.g.dart';
+class UsersRecord extends FirestoreRecord {
+  UsersRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
-  static Serializer<UsersRecord> get serializer => _$usersRecordSerializer;
+  // "email" field.
+  String? _email;
+  String get email => _email ?? '';
+  bool hasEmail() => _email != null;
 
-  String? get email;
+  // "display_name" field.
+  String? _displayName;
+  String get displayName => _displayName ?? '';
+  bool hasDisplayName() => _displayName != null;
 
-  @BuiltValueField(wireName: 'display_name')
-  String? get displayName;
+  // "photo_url" field.
+  String? _photoUrl;
+  String get photoUrl => _photoUrl ?? '';
+  bool hasPhotoUrl() => _photoUrl != null;
 
-  @BuiltValueField(wireName: 'photo_url')
-  String? get photoUrl;
+  // "uid" field.
+  String? _uid;
+  String get uid => _uid ?? '';
+  bool hasUid() => _uid != null;
 
-  String? get uid;
+  // "created_time" field.
+  DateTime? _createdTime;
+  DateTime? get createdTime => _createdTime;
+  bool hasCreatedTime() => _createdTime != null;
 
-  @BuiltValueField(wireName: 'created_time')
-  DateTime? get createdTime;
+  // "phone_number" field.
+  String? _phoneNumber;
+  String get phoneNumber => _phoneNumber ?? '';
+  bool hasPhoneNumber() => _phoneNumber != null;
 
-  @BuiltValueField(wireName: 'phone_number')
-  String? get phoneNumber;
+  // "member_id" field.
+  String? _memberId;
+  String get memberId => _memberId ?? '';
+  bool hasMemberId() => _memberId != null;
 
-  @BuiltValueField(wireName: 'member_id')
-  String? get memberId;
+  // "member_qr" field.
+  String? _memberQr;
+  String get memberQr => _memberQr ?? '';
+  bool hasMemberQr() => _memberQr != null;
 
-  @BuiltValueField(wireName: 'member_qr')
-  String? get memberQr;
+  // "company" field.
+  String? _company;
+  String get company => _company ?? '';
+  bool hasCompany() => _company != null;
 
-  String? get company;
+  // "pdpa_consent" field.
+  bool? _pdpaConsent;
+  bool get pdpaConsent => _pdpaConsent ?? false;
+  bool hasPdpaConsent() => _pdpaConsent != null;
 
-  @BuiltValueField(wireName: 'reward_pts')
-  int? get rewardPts;
+  // "reward_pts" field.
+  double? _rewardPts;
+  double get rewardPts => _rewardPts ?? 0.0;
+  bool hasRewardPts() => _rewardPts != null;
 
-  @BuiltValueField(wireName: 'pdpa_consent')
-  bool? get pdpaConsent;
+  // "is_deleted" field.
+  bool? _isDeleted;
+  bool get isDeleted => _isDeleted ?? false;
+  bool hasIsDeleted() => _isDeleted != null;
 
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "date_delete" field.
+  DateTime? _dateDelete;
+  DateTime? get dateDelete => _dateDelete;
+  bool hasDateDelete() => _dateDelete != null;
 
-  static void _initializeBuilder(UsersRecordBuilder builder) => builder
-    ..email = ''
-    ..displayName = ''
-    ..photoUrl = ''
-    ..uid = ''
-    ..phoneNumber = ''
-    ..memberId = ''
-    ..memberQr = ''
-    ..company = ''
-    ..rewardPts = 0
-    ..pdpaConsent = false;
+  // "contact_email" field.
+  String? _contactEmail;
+  String get contactEmail => _contactEmail ?? '';
+  bool hasContactEmail() => _contactEmail != null;
+
+  void _initializeFields() {
+    _email = snapshotData['email'] as String?;
+    _displayName = snapshotData['display_name'] as String?;
+    _photoUrl = snapshotData['photo_url'] as String?;
+    _uid = snapshotData['uid'] as String?;
+    _createdTime = snapshotData['created_time'] as DateTime?;
+    _phoneNumber = snapshotData['phone_number'] as String?;
+    _memberId = snapshotData['member_id'] as String?;
+    _memberQr = snapshotData['member_qr'] as String?;
+    _company = snapshotData['company'] as String?;
+    _pdpaConsent = snapshotData['pdpa_consent'] as bool?;
+    _rewardPts = castToType<double>(snapshotData['reward_pts']);
+    _isDeleted = snapshotData['is_deleted'] as bool?;
+    _dateDelete = snapshotData['date_delete'] as DateTime?;
+    _contactEmail = snapshotData['contact_email'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
 
-  static Stream<UsersRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<UsersRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => UsersRecord.fromSnapshot(s));
 
-  static Future<UsersRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<UsersRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => UsersRecord.fromSnapshot(s));
 
-  UsersRecord._();
-  factory UsersRecord([void Function(UsersRecordBuilder) updates]) =
-      _$UsersRecord;
+  static UsersRecord fromSnapshot(DocumentSnapshot snapshot) => UsersRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static UsersRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      UsersRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'UsersRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createUsersRecordData({
@@ -86,25 +136,29 @@ Map<String, dynamic> createUsersRecordData({
   String? memberId,
   String? memberQr,
   String? company,
-  int? rewardPts,
   bool? pdpaConsent,
+  double? rewardPts,
+  bool? isDeleted,
+  DateTime? dateDelete,
+  String? contactEmail,
 }) {
-  final firestoreData = serializers.toFirestore(
-    UsersRecord.serializer,
-    UsersRecord(
-      (u) => u
-        ..email = email
-        ..displayName = displayName
-        ..photoUrl = photoUrl
-        ..uid = uid
-        ..createdTime = createdTime
-        ..phoneNumber = phoneNumber
-        ..memberId = memberId
-        ..memberQr = memberQr
-        ..company = company
-        ..rewardPts = rewardPts
-        ..pdpaConsent = pdpaConsent,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'email': email,
+      'display_name': displayName,
+      'photo_url': photoUrl,
+      'uid': uid,
+      'created_time': createdTime,
+      'phone_number': phoneNumber,
+      'member_id': memberId,
+      'member_qr': memberQr,
+      'company': company,
+      'pdpa_consent': pdpaConsent,
+      'reward_pts': rewardPts,
+      'is_deleted': isDeleted,
+      'date_delete': dateDelete,
+      'contact_email': contactEmail,
+    }.withoutNulls,
   );
 
   return firestoreData;

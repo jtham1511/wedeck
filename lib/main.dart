@@ -1,10 +1,13 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'auth/firebase_user_provider.dart';
-import 'auth/auth_util.dart';
+import 'auth/firebase_auth/firebase_user_provider.dart';
+import 'auth/firebase_auth/auth_util.dart';
+
 import 'backend/push_notifications/push_notifications_util.dart';
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -15,11 +18,18 @@ import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await initFirebase();
 
   await FlutterFlowTheme.initialize();
 
-  runApp(MyApp());
+  final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -35,8 +45,8 @@ class _MyAppState extends State<MyApp> {
   Locale? _locale;
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
-  late Stream<WeDeckFirebaseUser> userStream;
-  WeDeckFirebaseUser? initialUser;
+  late Stream<BaseAuthUser> userStream;
+  BaseAuthUser? initialUser;
   bool displaySplashImage = true;
 
   final authUserSub = authenticatedUserStream.listen((_) {});
@@ -81,7 +91,10 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       locale: _locale,
-      supportedLocales: const [Locale('en', '')],
+      supportedLocales: const [
+        Locale('en'),
+        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+      ],
       theme: ThemeData(brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
@@ -117,7 +130,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'home';
+  String _currentPageName = 'homeFinal';
   late Widget? _currentPage;
 
   @override
@@ -130,13 +143,13 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'home': HomeWidget(),
+      'homeFinal': HomeFinalWidget(),
       'product_list': ProductListWidget(),
       'my_qr': MyQrWidget(),
       'personal_details': PersonalDetailsWidget(),
-      'product_listing2': ProductListing2Widget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
+
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],
       bottomNavigationBar: BottomNavigationBar(
@@ -161,7 +174,9 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.home,
               size: 24.0,
             ),
-            label: 'Home',
+            label: FFLocalizations.of(context).getText(
+              'azhuqf5s' /* Home */,
+            ),
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -169,7 +184,9 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.format_list_bulleted_rounded,
               size: 24.0,
             ),
-            label: 'Products',
+            label: FFLocalizations.of(context).getText(
+              'w9z4jgpp' /* Products */,
+            ),
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -177,7 +194,9 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.qr_code_scanner,
               size: 24.0,
             ),
-            label: 'my QR',
+            label: FFLocalizations.of(context).getText(
+              'hnves4zn' /* my QR */,
+            ),
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -185,15 +204,9 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.location_history_sharp,
               size: 24.0,
             ),
-            label: 'Profile',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.threed_rotation_sharp,
-              size: 24.0,
+            label: FFLocalizations.of(context).getText(
+              '99byw1m1' /* Profile */,
             ),
-            label: 'New',
             tooltip: '',
           )
         ],

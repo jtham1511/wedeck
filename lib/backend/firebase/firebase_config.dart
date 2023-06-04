@@ -10,7 +10,8 @@ Future initFirebase() async {
             projectId: "wedeck-a6a9a",
             storageBucket: "wedeck-a6a9a.appspot.com",
             messagingSenderId: "770824008817",
-            appId: "1:770824008817:web:a4bfcbb949212548ded7d0"));
+            appId: "1:770824008817:web:a4bfcbb949212548ded7d0",
+            measurementId: "G-Q0L7TQHDQS"));
   } else {
     await Firebase.initializeApp();
   }

@@ -1,5 +1,4 @@
-import '/auth/auth_util.dart';
-import '/backend/push_notifications/push_notifications_handler.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/create_acc_copy/create_acc_copy_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';

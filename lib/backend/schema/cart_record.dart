@@ -1,79 +1,148 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'cart_record.g.dart';
+class CartRecord extends FirestoreRecord {
+  CartRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class CartRecord implements Built<CartRecord, CartRecordBuilder> {
-  static Serializer<CartRecord> get serializer => _$cartRecordSerializer;
+  // "name" field.
+  String? _name;
+  String get name => _name ?? '';
+  bool hasName() => _name != null;
 
-  @BuiltValueField(wireName: 'created_at')
-  DateTime? get createdAt;
+  // "description" field.
+  String? _description;
+  String get description => _description ?? '';
+  bool hasDescription() => _description != null;
 
-  @BuiltValueField(wireName: 'modified_at')
-  DateTime? get modifiedAt;
+  // "specifications" field.
+  String? _specifications;
+  String get specifications => _specifications ?? '';
+  bool hasSpecifications() => _specifications != null;
 
-  @BuiltValueField(wireName: 'on_sale')
-  bool? get onSale;
+  // "price" field.
+  double? _price;
+  double get price => _price ?? 0.0;
+  bool hasPrice() => _price != null;
 
-  @BuiltValueField(wireName: 'sale_price')
-  double? get salePrice;
+  // "created_at" field.
+  DateTime? _createdAt;
+  DateTime? get createdAt => _createdAt;
+  bool hasCreatedAt() => _createdAt != null;
 
-  int? get quantity;
+  // "modified_at" field.
+  DateTime? _modifiedAt;
+  DateTime? get modifiedAt => _modifiedAt;
+  bool hasModifiedAt() => _modifiedAt != null;
 
-  @BuiltValueField(wireName: 'created_by')
-  DocumentReference? get createdBy;
+  // "on_sale" field.
+  bool? _onSale;
+  bool get onSale => _onSale ?? false;
+  bool hasOnSale() => _onSale != null;
 
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "sale_price" field.
+  double? _salePrice;
+  double get salePrice => _salePrice ?? 0.0;
+  bool hasSalePrice() => _salePrice != null;
 
-  static void _initializeBuilder(CartRecordBuilder builder) => builder
-    ..onSale = false
-    ..salePrice = 0.0
-    ..quantity = 0;
+  // "quantity" field.
+  int? _quantity;
+  int get quantity => _quantity ?? 0;
+  bool hasQuantity() => _quantity != null;
+
+  // "user" field.
+  DocumentReference? _user;
+  DocumentReference? get user => _user;
+  bool hasUser() => _user != null;
+
+  // "produc_image" field.
+  String? _producImage;
+  String get producImage => _producImage ?? '';
+  bool hasProducImage() => _producImage != null;
+
+  // "uom" field.
+  String? _uom;
+  String get uom => _uom ?? '';
+  bool hasUom() => _uom != null;
+
+  void _initializeFields() {
+    _name = snapshotData['name'] as String?;
+    _description = snapshotData['description'] as String?;
+    _specifications = snapshotData['specifications'] as String?;
+    _price = castToType<double>(snapshotData['price']);
+    _createdAt = snapshotData['created_at'] as DateTime?;
+    _modifiedAt = snapshotData['modified_at'] as DateTime?;
+    _onSale = snapshotData['on_sale'] as bool?;
+    _salePrice = castToType<double>(snapshotData['sale_price']);
+    _quantity = snapshotData['quantity'] as int?;
+    _user = snapshotData['user'] as DocumentReference?;
+    _producImage = snapshotData['produc_image'] as String?;
+    _uom = snapshotData['uom'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('cart');
 
-  static Stream<CartRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<CartRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => CartRecord.fromSnapshot(s));
 
-  static Future<CartRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<CartRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => CartRecord.fromSnapshot(s));
 
-  CartRecord._();
-  factory CartRecord([void Function(CartRecordBuilder) updates]) = _$CartRecord;
+  static CartRecord fromSnapshot(DocumentSnapshot snapshot) => CartRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static CartRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      CartRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'CartRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createCartRecordData({
+  String? name,
+  String? description,
+  String? specifications,
+  double? price,
   DateTime? createdAt,
   DateTime? modifiedAt,
   bool? onSale,
   double? salePrice,
   int? quantity,
-  DocumentReference? createdBy,
+  DocumentReference? user,
+  String? producImage,
+  String? uom,
 }) {
-  final firestoreData = serializers.toFirestore(
-    CartRecord.serializer,
-    CartRecord(
-      (c) => c
-        ..createdAt = createdAt
-        ..modifiedAt = modifiedAt
-        ..onSale = onSale
-        ..salePrice = salePrice
-        ..quantity = quantity
-        ..createdBy = createdBy,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'name': name,
+      'description': description,
+      'specifications': specifications,
+      'price': price,
+      'created_at': createdAt,
+      'modified_at': modifiedAt,
+      'on_sale': onSale,
+      'sale_price': salePrice,
+      'quantity': quantity,
+      'user': user,
+      'produc_image': producImage,
+      'uom': uom,
+    }.withoutNulls,
   );
 
   return firestoreData;

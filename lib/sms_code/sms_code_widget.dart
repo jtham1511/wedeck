@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/push_notifications/push_notifications_handler.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -40,23 +40,30 @@ class _SmsCodeWidgetState extends State<SmsCodeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      appBar: AppBar(
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Enter Pin Code Below',
-          style: FlutterFlowTheme.of(context).bodyMedium,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          automaticallyImplyLeading: false,
+          title: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+            child: Text(
+              FFLocalizations.of(context).getText(
+                '99ec4l58' /* Enter Pin Code Below */,
+              ),
+              style: FlutterFlowTheme.of(context).bodyMedium,
+            ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Column(
+        body: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -66,14 +73,18 @@ class _SmsCodeWidgetState extends State<SmsCodeWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    'Confirm your Code',
+                    FFLocalizations.of(context).getText(
+                      'n47qbaq3' /* Confirm your Code */,
+                    ),
                     style: FlutterFlowTheme.of(context).headlineSmall,
                   ),
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(44.0, 8.0, 44.0, 0.0),
                     child: Text(
-                      'This code helps keep your account safe and secure.',
+                      FFLocalizations.of(context).getText(
+                        'emq6wlod' /* This code helps keep your acco... */,
+                      ),
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).bodySmall,
                     ),
@@ -82,6 +93,7 @@ class _SmsCodeWidgetState extends State<SmsCodeWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
                     child: PinCodeTextField(
+                      autoDisposeControllers: false,
                       appContext: context,
                       length: 4,
                       textStyle:
@@ -92,6 +104,8 @@ class _SmsCodeWidgetState extends State<SmsCodeWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       enableActiveFill: false,
                       autoFocus: true,
+                      enablePinAutofill: true,
+                      errorTextSpace: 16.0,
                       showCursor: true,
                       cursorColor: FlutterFlowTheme.of(context).primary,
                       obscureText: false,
@@ -114,7 +128,10 @@ class _SmsCodeWidgetState extends State<SmsCodeWidget> {
                             FlutterFlowTheme.of(context).secondaryText,
                       ),
                       controller: _model.pinCodeController,
-                      onChanged: (_) => {},
+                      onChanged: (_) {},
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: _model.pinCodeControllerValidator
+                          .asValidator(context),
                     ),
                   ),
                 ],
@@ -133,7 +150,7 @@ class _SmsCodeWidgetState extends State<SmsCodeWidget> {
                     );
                     return;
                   }
-                  final phoneVerifiedUser = await verifySmsCode(
+                  final phoneVerifiedUser = await authManager.verifySmsCode(
                     context: context,
                     smsCode: smsCodeVal,
                   );
@@ -145,13 +162,15 @@ class _SmsCodeWidgetState extends State<SmsCodeWidget> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => PushNotificationsHandler(
-                        child: NavBarPage(initialPage: 'home'),
+                        child: NavBarPage(initialPage: 'homeFinal'),
                       ),
                     ),
                     (r) => false,
                   );
                 },
-                text: 'Confirm & Continue',
+                text: FFLocalizations.of(context).getText(
+                  'x1sub25c' /* Confirm & Continue */,
+                ),
                 options: FFButtonOptions(
                   width: 270.0,
                   height: 50.0,

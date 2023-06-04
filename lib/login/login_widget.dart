@@ -1,5 +1,6 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/push_notifications/push_notifications_handler.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -7,6 +8,8 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/forgot/forgot_widget.dart';
 import '/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login_model.dart';
@@ -19,10 +22,27 @@ class LoginWidget extends StatefulWidget {
   _LoginWidgetState createState() => _LoginWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginWidgetState extends State<LoginWidget>
+    with TickerProviderStateMixin {
   late LoginModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = {
+    'imageOnPageLoadAnimation': AnimationInfo(
+      reverse: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        RotateEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1680.ms,
+          begin: 0.0,
+          end: 4.0,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
@@ -42,6 +62,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -87,7 +109,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Back',
+                              FFLocalizations.of(context).getText(
+                                'gni5qokz' /* Back */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
                                   .override(
@@ -104,7 +128,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                     child: Text(
-                      'Login',
+                      FFLocalizations.of(context).getText(
+                        'mmbaa7fq' /* Login */,
+                      ),
                       style: FlutterFlowTheme.of(context).displaySmall.override(
                             fontFamily: 'Poppins',
                             fontSize: 28.0,
@@ -124,6 +150,15 @@ class _LoginWidgetState extends State<LoginWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+            child: Image.asset(
+              'assets/images/WeDeck-beta.png',
+              width: 110.0,
+              height: 100.0,
+              fit: BoxFit.cover,
+            ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!),
+          ),
+          Padding(
             padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 8.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -133,7 +168,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(4.0, 50.0, 4.0, 4.0),
                     child: Text(
-                      'Access your account by logging in below.',
+                      FFLocalizations.of(context).getText(
+                        '9fe0nwxl' /* Access your account by logging... */,
+                      ),
                       style: FlutterFlowTheme.of(context).titleSmall.override(
                             fontFamily: 'Poppins',
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -164,9 +201,17 @@ class _LoginWidgetState extends State<LoginWidget> {
                 controller: _model.emailAddressController,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: 'Your email address...',
-                  labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                  hintText: 'Enter your email...',
+                  labelText: FFLocalizations.of(context).getText(
+                    'u7fz7arl' /* Your email address... */,
+                  ),
+                  labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
+                        fontFamily: 'Poppins',
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                  hintText: FFLocalizations.of(context).getText(
+                    'hndyh7mr' /* Enter your email... */,
+                  ),
                   hintStyle: FlutterFlowTheme.of(context).bodySmall,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -233,9 +278,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                 controller: _model.passwordLoginController,
                 obscureText: !_model.passwordLoginVisibility,
                 decoration: InputDecoration(
-                  labelText: 'Password',
+                  labelText: FFLocalizations.of(context).getText(
+                    'yx52rkyk' /* Password */,
+                  ),
                   labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                  hintText: 'Please enter your password...',
+                  hintText: FFLocalizations.of(context).getText(
+                    'ku78n5gi' /* Please enter your password... */,
+                  ),
                   hintStyle: FlutterFlowTheme.of(context).bodySmall,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -299,7 +348,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
             child: FFButtonWidget(
               onPressed: () async {
-                final user = await signInWithEmail(
+                final user = await authManager.signInWithEmail(
                   context,
                   _model.emailAddressController.text,
                   _model.passwordLoginController.text,
@@ -312,13 +361,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => PushNotificationsHandler(
-                      child: NavBarPage(initialPage: 'home'),
+                      child: NavBarPage(initialPage: 'homeFinal'),
                     ),
                   ),
                   (r) => false,
                 );
               },
-              text: 'Login',
+              text: FFLocalizations.of(context).getText(
+                'halyxed0' /* Login */,
+              ),
               options: FFButtonOptions(
                 width: 270.0,
                 height: 50.0,
@@ -349,7 +400,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                   ),
                 );
               },
-              text: 'Forgot Password?',
+              text: FFLocalizations.of(context).getText(
+                'qf97bi0k' /* Forgot Password? */,
+              ),
               options: FFButtonOptions(
                 width: 170.0,
                 height: 70.0,

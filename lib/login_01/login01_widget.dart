@@ -1,5 +1,4 @@
-import '/auth/auth_util.dart';
-import '/backend/push_notifications/push_notifications_handler.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/create_acc_copy/create_acc_copy_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -44,6 +43,18 @@ class _Login01WidgetState extends State<Login01Widget>
         ),
       ],
     ),
+    'imageOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        RotateEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 970.ms,
+          begin: 0.0,
+          end: 2.0,
+        ),
+      ],
+    ),
   };
 
   @override
@@ -65,12 +76,14 @@ class _Login01WidgetState extends State<Login01Widget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).lineColor,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Stack(
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).lineColor,
+        body: Stack(
           children: [
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 0.0, 0.0),
@@ -85,6 +98,10 @@ class _Login01WidgetState extends State<Login01Widget>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           onTap: () async {
                             await Navigator.push(
                               context,
@@ -99,7 +116,8 @@ class _Login01WidgetState extends State<Login01Widget>
                             height: 180.0,
                             fit: BoxFit.fitWidth,
                           ),
-                        ),
+                        ).animateOnPageLoad(
+                            animationsMap['imageOnPageLoadAnimation']!),
                       ],
                     ).animateOnPageLoad(
                         animationsMap['rowOnPageLoadAnimation']!),
@@ -110,32 +128,39 @@ class _Login01WidgetState extends State<Login01Widget>
                       initialIndex: 0,
                       child: Column(
                         children: [
-                          TabBar(
-                            isScrollable: true,
-                            labelColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                            unselectedLabelColor:
-                                FlutterFlowTheme.of(context).secondaryText,
-                            labelPadding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .override(
-                                  fontFamily: 'Poppins',
-                                  color: Color(0xFF0F1113),
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.w600,
+                          Align(
+                            alignment: Alignment(0.0, 0),
+                            child: TabBar(
+                              isScrollable: true,
+                              labelColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              unselectedLabelColor:
+                                  FlutterFlowTheme.of(context).secondaryText,
+                              labelPadding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .titleMedium
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xFF0F1113),
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                              indicatorColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                              tabs: [
+                                Tab(
+                                  text: FFLocalizations.of(context).getText(
+                                    'osv419x8' /* Sign In */,
+                                  ),
                                 ),
-                            indicatorColor:
-                                FlutterFlowTheme.of(context).secondary,
-                            tabs: [
-                              Tab(
-                                text: 'Sign In',
-                              ),
-                              Tab(
-                                text: 'Sign Up',
-                              ),
-                            ],
+                                Tab(
+                                  text: FFLocalizations.of(context).getText(
+                                    '367yny1n' /* Sign Up */,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           Expanded(
                             child: TabBarView(
@@ -154,7 +179,11 @@ class _Login01WidgetState extends State<Login01Widget>
                                               _model.emailAddressController,
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText: 'Email Address',
+                                            labelText:
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'tyhxjv6r' /* Email Address */,
+                                            ),
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodySmall
@@ -165,7 +194,11 @@ class _Login01WidgetState extends State<Login01Widget>
                                                       fontWeight:
                                                           FontWeight.normal,
                                                     ),
-                                            hintText: 'Enter your email...',
+                                            hintText:
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'u95nu7bl' /* Enter your email... */,
+                                            ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodySmall
@@ -239,7 +272,11 @@ class _Login01WidgetState extends State<Login01Widget>
                                           obscureText:
                                               !_model.passwordVisibility,
                                           decoration: InputDecoration(
-                                            labelText: 'Password',
+                                            labelText:
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'e3dh0f93' /* Password */,
+                                            ),
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodySmall
@@ -250,7 +287,11 @@ class _Login01WidgetState extends State<Login01Widget>
                                                       fontWeight:
                                                           FontWeight.normal,
                                                     ),
-                                            hintText: 'Enter your password...',
+                                            hintText:
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'hkemvixt' /* Enter your password... */,
+                                            ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodySmall
@@ -334,10 +375,11 @@ class _Login01WidgetState extends State<Login01Widget>
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 60.0, 0.0, 0.0),
+                                            0.0, 40.0, 0.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            final user = await signInWithEmail(
+                                            final user = await authManager
+                                                .signInWithEmail(
                                               context,
                                               _model
                                                   .emailAddressController.text,
@@ -347,19 +389,48 @@ class _Login01WidgetState extends State<Login01Widget>
                                               return;
                                             }
 
-                                            await Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PushNotificationsHandler(
-                                                  child: NavBarPage(
-                                                      initialPage: 'home'),
+                                            if (valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.memberId,
+                                                        '') ==
+                                                    null ||
+                                                valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.memberId,
+                                                        '') ==
+                                                    '') {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType
+                                                      .topToBottom,
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  reverseDuration: Duration(
+                                                      milliseconds: 300),
+                                                  child: Login01Widget(),
                                                 ),
-                                              ),
-                                              (r) => false,
-                                            );
+                                              );
+                                            } else {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType
+                                                      .rightToLeft,
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  reverseDuration: Duration(
+                                                      milliseconds: 300),
+                                                  child: NavBarPage(
+                                                      initialPage: 'homeFinal'),
+                                                ),
+                                              );
+                                            }
                                           },
-                                          text: 'Sign In',
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'w0tn6g57' /* Sign In */,
+                                          ),
                                           options: FFButtonOptions(
                                             width: 230.0,
                                             height: 50.0,
@@ -390,7 +461,7 @@ class _Login01WidgetState extends State<Login01Widget>
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 30.0, 0.0, 0.0),
+                                            0.0, 20.0, 0.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             await Navigator.push(
@@ -401,7 +472,10 @@ class _Login01WidgetState extends State<Login01Widget>
                                               ),
                                             );
                                           },
-                                          text: 'Forgot Password?',
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'u8q1p3sa' /* Forgot Password? */,
+                                          ),
                                           options: FFButtonOptions(
                                             width: 170.0,
                                             height: 70.0,
@@ -442,7 +516,9 @@ class _Login01WidgetState extends State<Login01Widget>
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        'By providing your Personal Data to us, you consent to us processing your Personal Data in accordance with this Privacy Policy, and you confirm that all Personal Data provided by you is accurate and complete, and that none of it is misleading or out of date. You will promptly update us in the event of any change to your Personal Data.\n\nWe may reject access request if any exception or prohibition under the PDPA apply.\n',
+                                        FFLocalizations.of(context).getText(
+                                          'zfa6uj2n' /* By providing your Personal Dat... */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -464,7 +540,10 @@ class _Login01WidgetState extends State<Login01Widget>
                                               ),
                                             );
                                           },
-                                          text: 'Create Account',
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'po8ef41r' /* Create Account */,
+                                          ),
                                           options: FFButtonOptions(
                                             width: 230.0,
                                             height: 50.0,

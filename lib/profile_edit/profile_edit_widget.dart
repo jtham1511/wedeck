@@ -1,14 +1,15 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'profile_edit_model.dart';
@@ -35,8 +36,10 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
         TextEditingController(text: currentUserDisplayName);
     _model.emailaddressController ??=
         TextEditingController(text: currentUserEmail);
-    _model.contactNumberController ??= TextEditingController();
-    _model.companyController ??= TextEditingController();
+    _model.contactNumberController ??=
+        TextEditingController(text: currentPhoneNumber);
+    _model.companyController ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.company, ''));
     _model.memberIdController ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.memberId, ''));
   }
@@ -50,11 +53,13 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80.0),
+        preferredSize: Size.fromHeight(70.0),
         child: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
@@ -79,11 +84,22 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                         size: 30.0,
                       ),
                       onPressed: () async {
-                        Navigator.pop(context);
+                        await Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.scale,
+                            alignment: Alignment.bottomCenter,
+                            duration: Duration(milliseconds: 200),
+                            reverseDuration: Duration(milliseconds: 200),
+                            child: NavBarPage(initialPage: 'personal_details'),
+                          ),
+                        );
                       },
                     ),
                     Text(
-                      'Edit your Profile',
+                      FFLocalizations.of(context).getText(
+                        'udli7ir7' /* Edit your Profile */,
+                      ),
                       style:
                           FlutterFlowTheme.of(context).headlineMedium.override(
                                 fontFamily: 'Outfit',
@@ -103,25 +119,104 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
-              child: AuthUserStreamWidget(
-                builder: (context) => TextFormField(
-                  controller: _model.yourNameController,
-                  textCapitalization: TextCapitalization.words,
+        top: true,
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20.0, 5.0, 20.0, 10.0),
+                child: AuthUserStreamWidget(
+                  builder: (context) => TextFormField(
+                    controller: _model.yourNameController,
+                    textCapitalization: TextCapitalization.words,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: FFLocalizations.of(context).getText(
+                        'jinfdqs8' /* Your Name */,
+                      ),
+                      labelStyle:
+                          FlutterFlowTheme.of(context).bodySmall.override(
+                                fontFamily: 'Outfit',
+                                color: Color(0xFF57636C),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.normal,
+                              ),
+                      hintText: FFLocalizations.of(context).getText(
+                        'qgm2t6jj' /* Your Name */,
+                      ),
+                      hintStyle:
+                          FlutterFlowTheme.of(context).bodySmall.override(
+                                fontFamily: 'Outfit',
+                                color: Color(0xFF57636C),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.normal,
+                              ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFF1F4F8),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Outfit',
+                          color: Color(0xFF101213),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                        ),
+                    maxLines: null,
+                    keyboardType: TextInputType.name,
+                    validator:
+                        _model.yourNameControllerValidator.asValidator(context),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
+                child: TextFormField(
+                  controller: _model.emailaddressController,
                   obscureText: false,
                   decoration: InputDecoration(
-                    labelText: 'Your Name',
+                    labelText: FFLocalizations.of(context).getText(
+                      'ebl865r9' /* Email Address */,
+                    ),
                     labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal,
                         ),
-                    hintText: 'Your Name',
+                    hintText: FFLocalizations.of(context).getText(
+                      'elg9ivdp' /* Your Name */,
+                    ),
                     hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
                           fontFamily: 'Outfit',
                           color: Color(0xFF57636C),
@@ -164,365 +259,313 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Outfit',
                         color: Color(0xFF101213),
-                        fontSize: 14.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.normal,
                       ),
                   maxLines: null,
-                  keyboardType: TextInputType.name,
-                  validator:
-                      _model.yourNameControllerValidator.asValidator(context),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
-              child: TextFormField(
-                controller: _model.emailaddressController,
-                obscureText: false,
-                decoration: InputDecoration(
-                  labelText: 'Email Address',
-                  labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                        fontFamily: 'Outfit',
-                        color: Color(0xFF57636C),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
-                      ),
-                  hintText: 'Your Name',
-                  hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                        fontFamily: 'Outfit',
-                        color: Color(0xFF57636C),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
-                      ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xFFF1F4F8),
-                      width: 2.0,
-                    ),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0x00000000),
-                      width: 2.0,
-                    ),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0x00000000),
-                      width: 2.0,
-                    ),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0x00000000),
-                      width: 2.0,
-                    ),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
-                ),
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Outfit',
-                      color: Color(0xFF101213),
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.normal,
-                    ),
-                maxLines: null,
-                keyboardType: TextInputType.emailAddress,
-                validator:
-                    _model.emailaddressControllerValidator.asValidator(context),
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
-              child: AuthUserStreamWidget(
-                builder: (context) => TextFormField(
-                  controller: _model.contactNumberController,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Handphone Number',
-                    labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                          fontFamily: 'Outfit',
-                          color: Color(0xFF57636C),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.normal,
-                        ),
-                    hintText: currentPhoneNumber,
-                    hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                          fontFamily: 'Outfit',
-                          color: Color(0xFF57636C),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.normal,
-                        ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xFFF1F4F8),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Outfit',
-                        color: Color(0xFF101213),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
-                      ),
-                  maxLines: null,
-                  keyboardType: TextInputType.phone,
-                  validator: _model.contactNumberControllerValidator
+                  keyboardType: TextInputType.emailAddress,
+                  validator: _model.emailaddressControllerValidator
                       .asValidator(context),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[0-9]'))
-                  ],
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
-              child: AuthUserStreamWidget(
-                builder: (context) => TextFormField(
-                  controller: _model.companyController,
-                  textCapitalization: TextCapitalization.words,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Company',
-                    labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
+                child: AuthUserStreamWidget(
+                  builder: (context) => TextFormField(
+                    controller: _model.contactNumberController,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: FFLocalizations.of(context).getText(
+                        'gal5n3qn' /* Handphone Number */,
+                      ),
+                      labelStyle:
+                          FlutterFlowTheme.of(context).bodySmall.override(
+                                fontFamily: 'Outfit',
+                                color: Color(0xFF57636C),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.normal,
+                              ),
+                      hintText: FFLocalizations.of(context).getText(
+                        'o4h3f9vh' /* Enter your handphone with coun... */,
+                      ),
+                      hintStyle:
+                          FlutterFlowTheme.of(context).bodySmall.override(
+                                fontFamily: 'Outfit',
+                                color: Color(0xFF57636C),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.normal,
+                              ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFF1F4F8),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Outfit',
-                          color: Color(0xFF57636C),
-                          fontSize: 14.0,
+                          color: Color(0xFF101213),
+                          fontSize: 16.0,
                           fontWeight: FontWeight.normal,
                         ),
-                    hintText: valueOrDefault(currentUserDocument?.company, ''),
-                    hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                          fontFamily: 'Outfit',
-                          color: Color(0xFF57636C),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.normal,
-                        ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xFFF1F4F8),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                    maxLines: null,
+                    keyboardType: TextInputType.phone,
+                    validator: _model.contactNumberControllerValidator
+                        .asValidator(context),
+                    inputFormatters: [_model.contactNumberMask],
                   ),
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Outfit',
-                        color: Color(0xFF101213),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
-                      ),
-                  maxLines: null,
-                  validator:
-                      _model.companyControllerValidator.asValidator(context),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))
-                  ],
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
-              child: AuthUserStreamWidget(
-                builder: (context) => TextFormField(
-                  controller: _model.memberIdController,
-                  readOnly: true,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Member ID',
-                    labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                          fontFamily: 'Outfit',
-                          color: Color(0xFF57636C),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
+                child: AuthUserStreamWidget(
+                  builder: (context) => TextFormField(
+                    controller: _model.companyController,
+                    textCapitalization: TextCapitalization.words,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: FFLocalizations.of(context).getText(
+                        'n3s3z55l' /* Company */,
+                      ),
+                      labelStyle:
+                          FlutterFlowTheme.of(context).bodySmall.override(
+                                fontFamily: 'Outfit',
+                                color: Color(0xFF57636C),
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                      hintText: FFLocalizations.of(context).getText(
+                        'ao0q1j0h' /* Enter your Company name here */,
+                      ),
+                      hintStyle:
+                          FlutterFlowTheme.of(context).bodySmall.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF57636C),
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFF1F4F8),
+                          width: 2.0,
                         ),
-                    hintText: currentPhoneNumber,
-                    hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                          fontFamily: 'Outfit',
-                          color: Color(0xFF57636C),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Poppins',
+                          color: Color(0xFF101213),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                        ),
+                    maxLines: null,
+                    validator:
+                        _model.companyControllerValidator.asValidator(context),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
+                child: AuthUserStreamWidget(
+                  builder: (context) => TextFormField(
+                    controller: _model.memberIdController,
+                    readOnly: true,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: FFLocalizations.of(context).getText(
+                        'd47e4yca' /* Member ID */,
+                      ),
+                      labelStyle:
+                          FlutterFlowTheme.of(context).bodySmall.override(
+                                fontFamily: 'Outfit',
+                                color: Color(0xFF57636C),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                      hintText: currentPhoneNumber,
+                      hintStyle:
+                          FlutterFlowTheme.of(context).bodySmall.override(
+                                fontFamily: 'Outfit',
+                                color: Color(0xFF57636C),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFF1F4F8),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                    ),
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Poppins',
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xFFF1F4F8),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0x00000000),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                    textAlign: TextAlign.center,
+                    maxLines: null,
+                    validator:
+                        _model.memberIdControllerValidator.asValidator(context),
                   ),
-                  style: FlutterFlowTheme.of(context).headlineSmall.override(
-                        fontFamily: 'Poppins',
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                  textAlign: TextAlign.center,
-                  maxLines: null,
-                  validator:
-                      _model.memberIdControllerValidator.asValidator(context),
                 ),
               ),
-            ),
-            AuthUserStreamWidget(
-              builder: (context) => InkWell(
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.fade,
-                      child: FlutterFlowExpandedImageView(
-                        image: Image.network(
-                          valueOrDefault(currentUserDocument?.memberQr, ''),
-                          fit: BoxFit.contain,
+              AuthUserStreamWidget(
+                builder: (context) => InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.fade,
+                        child: FlutterFlowExpandedImageView(
+                          image: Image.network(
+                            valueOrDefault(currentUserDocument?.memberQr, ''),
+                            fit: BoxFit.contain,
+                          ),
+                          allowRotation: false,
+                          tag:
+                              valueOrDefault(currentUserDocument?.memberQr, ''),
+                          useHeroAnimation: true,
                         ),
-                        allowRotation: false,
-                        tag: valueOrDefault(currentUserDocument?.memberQr, ''),
-                        useHeroAnimation: true,
                       ),
-                    ),
-                  );
-                },
-                child: Hero(
-                  tag: valueOrDefault(currentUserDocument?.memberQr, ''),
-                  transitionOnUserGestures: true,
-                  child: Image.network(
-                    valueOrDefault(currentUserDocument?.memberQr, ''),
-                    width: 200.0,
-                    height: 200.0,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: AlignmentDirectional(0.0, 0.05),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    final usersUpdateData = createUsersRecordData(
-                      displayName: _model.yourNameController.text,
-                      phoneNumber: _model.contactNumberController.text,
-                      email: _model.emailaddressController.text,
                     );
-                    await currentUserReference!.update(usersUpdateData);
-                    Navigator.pop(context);
                   },
-                  text: 'Save Changes',
-                  options: FFButtonOptions(
-                    width: 150.0,
-                    height: 50.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: Color(0xFF4B39EF),
-                    textStyle:
-                        FlutterFlowTheme.of(context).titleMedium.override(
-                              fontFamily: 'Outfit',
-                              color: Colors.white,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.normal,
-                            ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
+                  child: Hero(
+                    tag: valueOrDefault(currentUserDocument?.memberQr, ''),
+                    transitionOnUserGestures: true,
+                    child: Image.network(
+                      valueOrDefault(currentUserDocument?.memberQr, ''),
+                      width: 200.0,
+                      height: 200.0,
+                      fit: BoxFit.fill,
                     ),
-                    borderRadius: BorderRadius.circular(50.0),
                   ),
                 ),
               ),
-            ),
-          ],
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.05),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      final usersUpdateData = createUsersRecordData(
+                        displayName: _model.yourNameController.text,
+                        phoneNumber: _model.contactNumberController.text,
+                        email: _model.emailaddressController.text,
+                      );
+                      await currentUserReference!.update(usersUpdateData);
+                      Navigator.pop(context);
+                    },
+                    text: FFLocalizations.of(context).getText(
+                      'ult5p3hp' /* Save Changes */,
+                    ),
+                    options: FFButtonOptions(
+                      width: 150.0,
+                      height: 50.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: Color(0xFF4B39EF),
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleMedium.override(
+                                fontFamily: 'Outfit',
+                                color: Colors.white,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.normal,
+                              ),
+                      elevation: 2.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

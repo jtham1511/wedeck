@@ -1,4 +1,5 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/push_notifications/push_notifications_handler.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,10 +7,12 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/login/login_widget.dart';
 import '/main.dart';
+import '/custom_code/actions/index.dart' as actions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'create_acc_copy_model.dart';
 export 'create_acc_copy_model.dart';
@@ -50,12 +53,14 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: Colors.white,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: SingleChildScrollView(
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -74,11 +79,15 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           if (Theme.of(context).brightness == Brightness.light)
-                            Image.asset(
-                              'assets/images/WeDeck-logo.png',
-                              width: 150.0,
-                              height: 125.3,
-                              fit: BoxFit.fitWidth,
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 0.0, 0.0),
+                              child: Image.asset(
+                                'assets/images/WeDeck-beta.png',
+                                width: 80.0,
+                                height: 90.0,
+                                fit: BoxFit.fitWidth,
+                              ),
                             ),
                           if (Theme.of(context).brightness == Brightness.dark)
                             Image.asset(
@@ -94,7 +103,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     40.0, 0.0, 0.0, 0.0),
                                 child: Text(
-                                  'Get Started',
+                                  FFLocalizations.of(context).getText(
+                                    '671ltu0u' /* Get Started */,
+                                  ),
                                   textAlign: TextAlign.end,
                                   style: FlutterFlowTheme.of(context)
                                       .displaySmall
@@ -108,9 +119,11 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 4.0, 0.0, 0.0),
+                                    20.0, 4.0, 0.0, 0.0),
                                 child: Text(
-                                  'Use the form below to get started.',
+                                  FFLocalizations.of(context).getText(
+                                    'r4mduzhk' /* Use the form below to get star... */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -143,7 +156,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                               ),
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Email Address',
+                                labelText: FFLocalizations.of(context).getText(
+                                  'f38a59d9' /* Email Address */,
+                                ),
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodySmall
                                     .override(
@@ -152,7 +167,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.normal,
                                     ),
-                                hintText: 'Enter your email here...',
+                                hintText: FFLocalizations.of(context).getText(
+                                  'pc2co8ki' /* Enter your email here... */,
+                                ),
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodySmall
                                     .override(
@@ -248,7 +265,10 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 textCapitalization: TextCapitalization.words,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Your Name',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'oack2410' /* Your Name */,
+                                  ),
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -257,7 +277,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.normal,
                                       ),
-                                  hintText: 'Enter your name here...',
+                                  hintText: FFLocalizations.of(context).getText(
+                                    'z3o8suta' /* Enter your name here... */,
+                                  ),
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -327,10 +349,6 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 keyboardType: TextInputType.name,
                                 validator: _model.usernameControllerValidator
                                     .asValidator(context),
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp('[a-zA-Z]'))
-                                ],
                               ),
                             ),
                           ),
@@ -352,7 +370,10 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 controller: _model.contactnumberController,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Contact Hp',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'txm9fhsc' /* Handphone No.  */,
+                                  ),
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -361,7 +382,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.normal,
                                       ),
-                                  hintText: 'Enter your HP number here...',
+                                  hintText: FFLocalizations.of(context).getText(
+                                    'l658nwka' /* For Singapore  65 8888 111 */,
+                                  ),
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -418,10 +441,7 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 validator: _model
                                     .contactnumberControllerValidator
                                     .asValidator(context),
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp('[0-9]'))
-                                ],
+                                inputFormatters: [_model.contactnumberMask],
                               ),
                             ),
                           ),
@@ -444,7 +464,10 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 textCapitalization: TextCapitalization.words,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Company',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'ykph8vgr' /* Company */,
+                                  ),
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -453,7 +476,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.normal,
                                       ),
-                                  hintText: 'Enter your Company here...',
+                                  hintText: FFLocalizations.of(context).getText(
+                                    '6ynfhkwc' /* Enter your Company here... */,
+                                  ),
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -526,7 +551,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                               controller: _model.passwordController,
                               obscureText: !_model.passwordVisibility,
                               decoration: InputDecoration(
-                                labelText: 'Password',
+                                labelText: FFLocalizations.of(context).getText(
+                                  'mctpntp3' /* Password */,
+                                ),
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodySmall
                                     .override(
@@ -535,7 +562,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.normal,
                                     ),
-                                hintText: 'Enter your password here...',
+                                hintText: FFLocalizations.of(context).getText(
+                                  'qnwtsdrw' /* Enter your password here... */,
+                                ),
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodySmall
                                     .override(
@@ -623,7 +652,10 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                   obscureText:
                                       !_model.passwordconfirmVisibility,
                                   decoration: InputDecoration(
-                                    labelText: 'Confirm Password',
+                                    labelText:
+                                        FFLocalizations.of(context).getText(
+                                      'id717ji2' /* Confirm Password */,
+                                    ),
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
@@ -633,7 +665,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                           fontWeight: FontWeight.normal,
                                         ),
                                     hintText:
-                                        'Please Confirm your password here...',
+                                        FFLocalizations.of(context).getText(
+                                      'dra4ng77' /* Please Confirm your password h... */,
+                                    ),
                                     hintStyle: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
@@ -710,7 +744,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: Text(
-                                'By providing your Personal Data to us, you consent to us processing your Personal Data in accordance with this Privacy Policy, and you confirm that all Personal Data provided by you is accurate and complete, and that none of it is misleading or out of date. You will promptly update us in the event of any change to your Personal Data.\n\nWe may reject access request if any exception or prohibition under the PDPA apply.',
+                                FFLocalizations.of(context).getText(
+                                  '7rlc08tm' /* By providing your Personal Dat... */,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -745,7 +781,8 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 return;
                               }
 
-                              final user = await createAccountWithEmail(
+                              final user =
+                                  await authManager.createAccountWithEmail(
                                 context,
                                 _model.emailAddressController.text,
                                 _model.passwordController.text,
@@ -759,23 +796,57 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 phoneNumber:
                                     _model.contactnumberController.text,
                                 company: _model.companynameController.text,
+                                email: _model.emailAddressController.text,
                               );
                               await UsersRecord.collection
                                   .doc(user.uid)
                                   .update(usersCreateData);
 
+                              await Future.delayed(
+                                  const Duration(milliseconds: 500));
+                              _model.memberIdgenerated =
+                                  await actions.createMemberId(
+                                dateTimeFormat(
+                                  'yQQQ',
+                                  getCurrentTimestamp,
+                                  locale:
+                                      FFLocalizations.of(context).languageCode,
+                                ),
+                              );
+                              await Future.delayed(
+                                  const Duration(milliseconds: 500));
+                              await authManager.sendEmailVerification();
+                              _model.qrcodeGenerated =
+                                  await MemberQRCodeCall.call(
+                                memberID: _model.memberIdgenerated,
+                              );
+                              await Future.delayed(
+                                  const Duration(milliseconds: 1000));
+
+                              final usersUpdateData = createUsersRecordData(
+                                memberId: _model.memberIdgenerated,
+                                memberQr: MemberQRCodeCall.qrImagePath(
+                                  (_model.qrcodeGenerated?.jsonBody ?? ''),
+                                ),
+                              );
+                              await currentUserReference!
+                                  .update(usersUpdateData);
                               await Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
                                       PushNotificationsHandler(
-                                    child: NavBarPage(initialPage: 'home'),
+                                    child: NavBarPage(initialPage: 'homeFinal'),
                                   ),
                                 ),
                                 (r) => false,
                               );
+
+                              setState(() {});
                             },
-                            text: 'Create Account',
+                            text: FFLocalizations.of(context).getText(
+                              'f72k24hv' /* Create Account */,
+                            ),
                             options: FFButtonOptions(
                               width: 190.0,
                               height: 50.0,
@@ -810,7 +881,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Already have an account?',
+                            FFLocalizations.of(context).getText(
+                              'rdt4lhxq' /* Already have an account? */,
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -832,7 +905,9 @@ class _CreateAccCopyWidgetState extends State<CreateAccCopyWidget> {
                                 ),
                               );
                             },
-                            text: 'Log In',
+                            text: FFLocalizations.of(context).getText(
+                              '2aqd2zjs' /* Log In */,
+                            ),
                             options: FFButtonOptions(
                               width: 90.0,
                               height: 50.0,

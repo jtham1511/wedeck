@@ -96,26 +96,30 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'forgot': (data) async => ForgotWidget(),
   'personal_details': (data) async =>
       NavBarPage(initialPage: 'personal_details'),
-  'spanish_walnut_product': (data) async => SpanishWalnutProductWidget(),
-  'G1FlutedDarkEbony': (data) async => G1FlutedDarkEbonyWidget(),
-  'G1FlutedSilverFir': (data) async => G1FlutedSilverFirWidget(),
-  'G1FlutedWalnutwpc': (data) async => G1FlutedWalnutwpcWidget(),
-  'MagellanRomanAntique': (data) async => MagellanRomanAntiqueWidget(),
-  'MagellanPeruvianTeak': (data) async => MagellanPeruvianTeakWidget(),
-  'ChengalCeiling': (data) async => ChengalCeilingWidget(),
   'product_list': (data) async => NavBarPage(initialPage: 'product_list'),
-  'product_listing2': (data) async =>
-      NavBarPage(initialPage: 'product_listing2'),
+  'product_listing2': (data) async => ProductListing2Widget(),
   'profile_edit': (data) async => ProfileEditWidget(),
   'my_qr': (data) async => NavBarPage(initialPage: 'my_qr'),
   'login': (data) async => LoginWidget(),
   'privacy': (data) async => PrivacyWidget(),
-  'S3W5BrasilianWalnut': (data) async => S3W5BrasilianWalnutWidget(),
-  'S3W6BrasilianEbony': (data) async => S3W6BrasilianEbonyWidget(),
-  'SolidOakSkirting': (data) async => SolidOakSkirtingWidget(),
   'sms_code': (data) async => SmsCodeWidget(),
   'phone_signin': (data) async => PhoneSigninWidget(),
   'close_account': (data) async => CloseAccountWidget(),
+  'product_details': (data) async => ProductDetailsWidget(
+        productDetails: getParameter(data, 'productDetails'),
+      ),
+  'cart01': (data) async => Cart01Widget(),
+  'cart': (data) async => CartWidget(
+        cartTotalAmt: getParameter(data, 'cartTotalAmt'),
+      ),
+  'cart02': (data) async => Cart02Widget(
+        cartRef: getParameter(data, 'cartRef'),
+      ),
+  'OrderConfirm': (data) async => OrderConfirmWidget(),
+  'CheckOutPage': (data) async => CheckOutPageWidget(
+        orderId: getParameter(data, 'orderId'),
+        cartId: [],
+      ),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

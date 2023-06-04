@@ -1,4 +1,5 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/backend/push_notifications/push_notifications_handler.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,10 +7,12 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/login/login_widget.dart';
 import '/main.dart';
+import '/custom_code/actions/index.dart' as actions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 
 class CreateAccCopyModel extends FlutterFlowModel {
@@ -23,6 +26,7 @@ class CreateAccCopyModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? usernameControllerValidator;
   // State field(s) for contactnumber widget.
   TextEditingController? contactnumberController;
+  final contactnumberMask = MaskTextInputFormatter(mask: '+#################');
   String? Function(BuildContext, String?)? contactnumberControllerValidator;
   // State field(s) for companyname widget.
   TextEditingController? companynameController;
@@ -35,6 +39,10 @@ class CreateAccCopyModel extends FlutterFlowModel {
   TextEditingController? passwordconfirmController;
   late bool passwordconfirmVisibility;
   String? Function(BuildContext, String?)? passwordconfirmControllerValidator;
+  // Stores action output result for [Custom Action - createMemberId] action in Button-Login widget.
+  String? memberIdgenerated;
+  // Stores action output result for [Backend Call - API (memberQRCode)] action in Button-Login widget.
+  ApiCallResponse? qrcodeGenerated;
 
   /// Initialization and disposal methods.
 

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>WeDeck-Release</string>
+	<string>WeDeck by YiWei Supplies</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -16,6 +16,11 @@
 	<string>WeDeck</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh_Hans</string>
+	</array>
 
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
@@ -44,7 +49,8 @@
 	<false/>
 
 
-
+	<key>PermissionGroupNotification</key>
+    <string>Allow the Apps to send system specific notification </string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>
