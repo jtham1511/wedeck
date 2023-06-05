@@ -1,6 +1,6 @@
 # WeDeck
 
-A new Flutter project.
+Flutter project for B2B Marketplace.
 
 ## Getting Started
 
